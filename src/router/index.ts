@@ -7,26 +7,20 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: Home
-    },
-    {
-      path: '/form',
-      name: 'form',
-      component: () => import('@/views/form/index.vue')
+      redirect: '/form',
+      children: [
+        {
+          name: 'form',
+          path: '/form',
+          component: () => import('@/views/form/index.vue')
+        }
+      ],
     },
     {
       path: '/flow',
       name: 'flow',
       component: () => import('@/views/flow/index.vue')
     },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import('../views/AboutView.vue')
-    // }
   ]
 })
 
