@@ -4,7 +4,7 @@ import type { FormInfo, FormItem } from "@/views/form/index";
 import formItem from "./formItem.vue";
 import { View, Upload, Download, Tickets } from "@element-plus/icons-vue";
 import { request } from "@/api/index";
-import { inject, ref, watch, type Ref } from "vue";
+import { inject, onMounted, ref, watch, type Ref } from "vue";
 
 /**表单信息 */
 const formInfo: FormInfo = inject<FormInfo>("formInfo") as FormInfo;
@@ -30,57 +30,25 @@ function change(event: any) {
     isDraggable.value = false;
   }
 }
-
 </script>
 
 <template>
   <div class="form-main">
-    <el-form
-      style="height: 100%"
-      :label-position="formInfo.config.labelPosition"
-      :size="formInfo.config.labelSize"
-      :label-width="formInfo.config.labelWidth"
-    >
+    <el-form style="height: 100%" :label-position="formInfo.config.labelPosition" :size="formInfo.config.labelSize"
+      :label-width="formInfo.config.labelWidth">
       <el-scrollbar height="100%" view-style="height:100%">
-        <draggable
-          :list="formInfo.list"
-          group="people"
-          item-key="id"
-          :force-fallback="true"
-          ghost-class="form-main-ghost"
-          drag-class="form-main-drag"
-          style="height: 100%"
-          :disabled="!isDraggable"
-          @change="change"
-          @end="isDraggable = false"
-        >
+        <draggable :list="formInfo.list" group="people" item-key="id" :force-fallback="true"
+          ghost-class="form-main-ghost" drag-class="form-main-drag" style="height: 100%" :disabled="!isDraggable"
+          @change="change" @end="isDraggable = false">
           <template #item="{ element }">
-            <form-item
-              :element="element"
-              v-if="element.type !== 'row'"
-              :formInfo="formInfo"
-            ></form-item>
-   
+            <form-item :element="element" v-if="element.type !== 'row'" :formInfo="formInfo"></form-item>
           </template>
           <template #header>
             <el-space class="form-main-operate">
-              <el-button
-                size="small"
-                link
-                type="primary"
-                :icon="Tickets"
-                @click="saveForm"
-                >保存</el-button
-              >
-              <el-button size="small" link type="primary" :icon="View"
-                >预览</el-button
-              >
-              <el-button size="small" link type="primary" :icon="Download"
-                >导出JSON</el-button
-              >
-              <el-button size="small" link type="primary" :icon="Upload"
-                >导入JSON</el-button
-              >
+              <el-button size="small" link type="primary" :icon="Tickets" @click="saveForm">保存</el-button>
+              <el-button size="small" link type="primary" :icon="View">预览</el-button>
+              <el-button size="small" link type="primary" :icon="Download">导出JSON</el-button>
+              <el-button size="small" link type="primary" :icon="Upload">导入JSON</el-button>
             </el-space>
           </template>
         </draggable>
@@ -92,6 +60,7 @@ function change(event: any) {
 <style scoped lang="scss">
 .form-main {
   height: 100%;
+
   .form-main-operate {
     display: flex;
     justify-content: flex-end;
@@ -107,6 +76,7 @@ function change(event: any) {
     border-left: 1px solid #409eff;
     background: #b3d8ff;
   }
+
   .form-main-row {
     min-height: 80px;
     user-select: none;
@@ -115,6 +85,7 @@ function change(event: any) {
     word-break: break-all;
     border: 1px dashed #409eff;
     align-items: center;
+
     .form-main-col {
       min-height: 70px;
       border: 1px dashed #409eff;

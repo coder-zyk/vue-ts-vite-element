@@ -26,7 +26,8 @@
     id: "id",
     type: "",
     field: "",
-    value: "",
+    value: '',
+    required:false,
     props: {},
   });
   /**表单数据字段表 */
@@ -47,7 +48,7 @@
       <el-main>
         <form-main></form-main>
       </el-main>
-      <el-aside width="300px">
+      <el-aside width="300px" style="height:100%">
         <form-right></form-right>
       </el-aside>
     </el-container>

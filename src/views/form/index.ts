@@ -1,4 +1,3 @@
-import type { InputProps, RadioProps, CheckboxProps, ElDatePicker, ElSelect, ElColorPicker, SwitchProps, ElRate, InputNumberProps, RowProps, ColProps } from 'element-plus';
 /**表单信息 */
 interface FormInfo {
   id: number,
@@ -9,18 +8,13 @@ interface FormInfo {
 interface FormConfig {
   name: string,
   labelWidth: number,
-  labelPosition: 'right'|'top'|'left',
-  labelSize: 'small'|'default'|'large',
+  labelPosition: 'right' | 'top' | 'left',
+  labelSize: 'small' | 'default' | 'large',
   dbName: {
     name: string,
     dbId: number,
   }
 }
-/**输入框的props */
-type DatePickerProps = InstanceType<typeof ElDatePicker>['$props']
-type SelectProps = InstanceType<typeof ElSelect>['$props']
-type ColorPickerProps = InstanceType<typeof ElColorPicker>['$props']
-type RateProps = InstanceType<typeof ElRate>['$props']
 /**组件信息 */
 interface FormItem {
   /**组件的label */
@@ -31,19 +25,148 @@ interface FormItem {
   type: string,
   /**组件的字段 */
   field: string,
+  /**是否必填 */
+  required: boolean,
   /**组件的值 */
   value: string | number | Array<any> | boolean
-  /**组件的props */
-  props: FormItemProps,
   /**组件验证规则 */
   validate?: Array<any>
   /**栅格布局 */
   col?: any
 }
-type OptionProp = { height?: string, width?: string, position?: string, fontSize?: string, options?: Array<any>, list?: Array<any> }
+/**文本配置 */
+interface TextFormItem extends FormItem {
+  props: {
+    height: string,
+    width: string,
+    position: string,
+    textColor: string,
+    fontSize: string,
+  }
+}
+/**输入框配置 */
+interface InputFormItem extends FormItem {
+  props: {
+    type: 'text' | 'textarea' | 'number' | 'password',
+    maxlength: number,
+    minlength: number,
+    autofocus: boolean,
+    showWordLimit: boolean,
+    placeholder: string,
+    clearable: boolean,
+    showPassword: boolean,
+    disabled: boolean,
+    rows: number,
+    autosize: boolean,
+    autocomplete: string,
+    readonly: boolean,
+    resize: 'none' | 'both' | 'horizontal' | 'vertical'
+  }
+
+}
+/**数字输入框配置 */
+interface InputNumberFormItem extends FormItem {
+  props: {
+    min: number,
+    max: number,
+    step: number,
+    stepStrictly: boolean,
+    precision: number,
+    readonly: boolean,
+    disabled: boolean,
+    controls: boolean,
+    controlsPosition: 'right' | '',
+    placeholder: string,
+  }
+}
+/**单选框配置 */
+interface RadioFormItem extends FormItem {
+  remote: boolean,
+  data: Array<any>
+  props: {
+    disabled: boolean,
+    textColor: string,
+    fill: string,
+    border: boolean,
+    label: string | number | boolean,
+    isButton: boolean
+  }
+}
+/**多选框配置 */
+interface CheckboxFormItem extends FormItem {
+  remote: boolean,
+  data: Array<any>
+  props: {
+    disabled: boolean,
+    textColor: string,
+    fill: string,
+    border: boolean,
+    min: number,
+    max: number,
+    label: string | number | boolean,
+    isButton: boolean,
+  }
+}
+/**下拉选择框配置 */
+interface SelectFormItem extends FormItem {
+  remote: boolean,
+  data: Array<any>
+  props: {
+    multiple: boolean,
+    disabled: boolean,
+    clearable: boolean,
+    multipleLimit: number,
+    placeholder: string,
+    filterable: boolean,
+    allowCreate: boolean,
+    noMatchText: string,
+    noDataText: string,
+    collapseTags: boolean
+  }
+}
+/**日期选择器配置 */
+interface DateFormItem extends FormItem {
+  props: {
+    disabled: boolean,
+    placeholder: string,
+    clearable: boolean,
+    type: string,
+    format: string,
+    valueFormat: string,
+    editable: boolean,
+    startPlaceholder: string,
+    endPlaceholder: string,
+    rangeSeparator: string,
+    unlinkPanels: boolean,
+  }
+}
+/**时间选择器配置 */
+interface TimeFormItem extends FormItem {
+  props: {
+    disabled: boolean,
+    placeholder: string,
+    clearable: boolean,
+    editable: boolean,
+    startPlaceholder: string,
+    endPlaceholder: string,
+    isRange: boolean,
+    arrowControl:boolean
+  }
+}
+/**颜色选择器配置 */
+interface ColorPickFormItem extends FormItem {
+}
+/**评分配置 */
+interface RatePickFormItem extends FormItem {
+}
+/**开关配置 */
+interface SwitchFormItem extends FormItem {
+}
+/**row配置 */
+interface RowFormItem extends FormItem {
+}
 /**组件的具体配置 */
-type FormItemProps = OptionProp | InputProps | InputNumberProps | DatePickerProps | ColorPickerProps | SelectProps | SwitchProps | RowProps | ColProps | CheckboxProps | RadioProps | RateProps | any
-const formBaseItems: Array<FormItem> = [
+const formBaseItems = [
   {
     type: 'text',
     id: 'id',
@@ -63,16 +186,6 @@ const formBaseItems: Array<FormItem> = [
     title: '单行输入',
     field: 'input',
     value: '',
-    props: {
-
-    }
-  },
-  {
-    type: 'textarea',
-    id: 'id',
-    title: '多行输入',
-    field: 'textarea',
-    value: 'textarea',
     props: {}
   },
   {
@@ -127,7 +240,7 @@ const formBaseItems: Array<FormItem> = [
     id: 'id',
     title: '选择框',
     field: 'select',
-    value: '',
+    value: [],
     props: {
       options: [{
         label: '选项1',
@@ -143,10 +256,10 @@ const formBaseItems: Array<FormItem> = [
     }
   },
   {
-    type: 'datetime',
+    type: 'time',
     id: 'id',
     title: '时间选择器',
-    field: 'datetime',
+    field: 'time',
     value: '',
     props: {
       disabled: false,
@@ -155,10 +268,10 @@ const formBaseItems: Array<FormItem> = [
     }
   },
   {
-    type: 'date',
+    type: 'datetime',
     id: 'id',
     title: '日期选择器',
-    field: 'date',
+    field: 'datetime',
     value: '',
     props: {
       disabled: false,
@@ -207,7 +320,7 @@ const formBaseItems: Array<FormItem> = [
     }
   }
 ]
-const formAdvancedItems: Array<FormItem> = [
+const formAdvancedItems = [
   {
     type: 'blank',
     id: 'id',
@@ -246,7 +359,7 @@ const formAdvancedItems: Array<FormItem> = [
     }
   }
 ]
-const formLayoutItems: Array<FormItem> = [
+const formLayoutItems = [
   {
     type: 'row',
     id: 'id',
@@ -257,4 +370,23 @@ const formLayoutItems: Array<FormItem> = [
     }
   }
 ]
-export { type FormInfo, type FormItem, type FormConfig, formBaseItems, formAdvancedItems, formLayoutItems }
+export {
+  FormItem,
+  TextFormItem,
+  InputFormItem,
+  InputNumberFormItem,
+  RadioFormItem,
+  CheckboxFormItem,
+  DateFormItem,
+  TimeFormItem,
+  SelectFormItem,
+  ColorPickFormItem,
+  RatePickFormItem,
+  SwitchFormItem,
+  RowFormItem,
+  FormInfo,
+  FormConfig,
+  formBaseItems,
+  formAdvancedItems,
+  formLayoutItems
+}

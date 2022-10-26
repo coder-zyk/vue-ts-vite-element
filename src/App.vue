@@ -11,7 +11,9 @@ import Navbar from '@/components/navbar/index.vue'
     <el-main class="zyk-main">
       <RouterView />
     </el-main>
-    <el-footer class="zyk-footer">Footer</el-footer>
+    <el-footer class="zyk-footer">
+      <el-link href="https://beian.miit.gov.cn/" target="_blank">蜀ICP备2022002176号</el-link>
+    </el-footer>
   </el-container>
 </template>
 
@@ -40,7 +42,7 @@ import Navbar from '@/components/navbar/index.vue'
     top: unset;
     bottom: 0px;
     width: 100%;
-
+    text-align: center;
   }
 }
 </style>

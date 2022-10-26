@@ -1,4 +1,5 @@
-import type { FormItem } from "."
+import { inputProps } from "element-plus"
+import type { InputFormItem, RadioFormItem, InputNumberFormItem, CheckboxFormItem, SelectFormItem, DateFormItem, TimeFormItem } from "."
 
 class Maker {
   /**索引签名
@@ -6,7 +7,7 @@ class Maker {
   [index: string]: any
 
   /**文本 */
-  text(): FormItem {
+  text(): any {
     return {
       type: 'text',
       id: 'text',
@@ -22,141 +23,192 @@ class Maker {
     }
   }
   /**单行输入框 */
-  input(): FormItem {
+  input(): InputFormItem {
     return {
       type: 'input',
       id: 'input',
       title: '单行输入',
       field: 'input',
-      value: 'input',
+      value: '',
+      required: false,
       props: {
-
-      }
+        maxlength: 999,
+        minlength: 0,
+        rows: 3,
+        type: 'text',
+        autocomplete: 'off',
+        autofocus: false,
+        autosize: false,
+        showPassword: false,
+        showWordLimit: false,
+        placeholder: '',
+        readonly: false,
+        resize: 'none',
+        clearable: false,
+        disabled: false
+      },
     }
   }
 
-  /**多行输入框 */
-  textarea(): FormItem {
-    return {
-      type: 'textarea',
-      id: 'textarea',
-      title: '多行输入',
-      field: 'textarea',
-      value: 'textarea',
-      props: {}
-    }
-  }
   /**数字输入框 */
-  number(): FormItem {
+  number(): InputNumberFormItem {
     return {
       type: 'number',
       id: 'number',
       title: '数字输入',
       field: 'number',
       value: 1,
-      props: {}
+      required: false,
+      props: {
+        min: 1,
+        max: 999,
+        step: 1,
+        stepStrictly: false,
+        readonly: false,
+        placeholder: '',
+        precision: 0,
+        disabled: false,
+        controls: true,
+        controlsPosition: ''
+      }
     }
   }
   /**单选框 */
-  radio(): FormItem {
+  radio(): RadioFormItem {
     return {
       type: 'radio',
       id: 'radio',
       title: '单选框',
       field: 'radio',
-      value: '选项1',
+      value: '',
+      remote: false,
+      required: false,
       props: {
-        options: [{
-          label: '选项1',
-          value: '选项1'
-        },
-        {
-          label: '选项2',
-          value: '选项2'
-        }, {
-          label: '选项3',
-          value: '选项3'
-        }]
-      }
+        label: '',
+        disabled: false,
+        textColor: '',
+        border: false,
+        isButton: false,
+        fill: ''
+      },
+      data: [{
+        label: '选项1',
+        value: 1
+      },
+      {
+        label: '选项2',
+        value: 2
+      }]
     }
   }
   /**多选框 */
-  checkbox(): FormItem {
+  checkbox(): CheckboxFormItem {
     return {
       type: 'checkbox',
       id: 'checkbox',
       title: '多选框',
       field: 'checkbox',
       value: [],
+      required: false,
       props: {
-        options: [
-          {
-            label: '选项1',
-          }, {
-            label: '选项2',
-          },
-          {
-            label: '选项3',
-          }
-        ]
-      }
+        label: '',
+        disabled: false,
+        textColor: '',
+        border: false,
+        isButton: false,
+        fill: '',
+        max: 999,
+        min: 0
+      },
+      remote: false,
+      data: [{
+        label: '选项1',
+        value: 1
+      },
+      {
+        label: '选项2',
+        value: 2
+      }]
     }
   }
   /**选择框 */
-  select(): FormItem {
+  select(): SelectFormItem {
     return {
       type: 'select',
       id: 'select',
       title: '选择框',
       field: 'select',
-      value: '',
+      value: [],
+      remote: false,
+      required: false,
+      data: [{
+        label: '选项1',
+        value: 1
+      }, {
+        label: '选项2',
+        value: 2
+      }],
       props: {
-        options: [{
-          label: '选项1',
-          value: '选项1'
-        },
-        {
-          label: '选项2',
-          value: '选项2'
-        }, {
-          label: '选项3',
-          value: '选项3'
-        }]
+        multiple: false,
+        multipleLimit: 0,
+        disabled: false,
+        noDataText: '',
+        noMatchText: '',
+        clearable: false,
+        collapseTags: false,
+        allowCreate: false,
+        placeholder: '',
+        filterable: false
       }
     }
   }
   /**时间选择 */
-  datetime(): FormItem {
+  time(): TimeFormItem {
     return {
-      type: 'datetime',
-      id: 'datetime',
+      type: 'time',
+      id: 'time',
       title: '时间选择器',
-      field: 'datetime',
+      field: 'time',
       value: '',
+      required: false,
       props: {
         disabled: false,
         placeholder: '',
-        format: 'YYYY-MM-DD HH:mm:ss'
+        isRange: false,
+        endPlaceholder: '',
+        startPlaceholder: '',
+        clearable: false,
+        arrowControl: true,
+        editable: false,
       }
     }
   }
   /**日期选择 */
-  date(): FormItem {
+  datetime(): DateFormItem {
     return {
-      type: 'date',
-      id: 'date',
+      type: 'datetime',
+      id: 'datetime',
       title: '日期选择器',
-      field: 'date',
+      field: 'datetime',
       value: '',
+      required: false,
       props: {
         disabled: false,
+        startPlaceholder: '',
+        editable: false,
+        endPlaceholder: '',
         placeholder: '',
-        format: 'YYYY-MM-DD'
+        format: 'YYYY-MM-DD hh:ss:mm',
+        type: 'date',
+        valueFormat: '',
+        rangeSeparator: '-',
+        unlinkPanels: false,
+        clearable: false,
       }
     }
   }
   /**评分 */
-  rate(): FormItem {
+  rate(): any {
     return {
       type: 'rate',
       id: 'rate',
@@ -169,7 +221,7 @@ class Maker {
     }
   }
   /**颜色选择 */
-  color(): FormItem {
+  color(): any {
     return {
       type: 'color',
       id: 'color',
@@ -182,7 +234,7 @@ class Maker {
     }
   }
   /**开关 */
-  switch(): FormItem {
+  switch(): any {
     return {
       type: 'switch',
       id: 'switch',
@@ -195,7 +247,7 @@ class Maker {
     }
   }
   /**滑块 */
-  slider(): FormItem {
+  slider(): any {
     return {
       type: 'slider',
       id: 'slider',
@@ -207,7 +259,7 @@ class Maker {
     }
   }
   /**级联选择 */
-  cascader(): FormItem {
+  cascader(): any {
     return {
       type: 'cascader',
       id: 'cascader',
@@ -219,7 +271,7 @@ class Maker {
     }
   }
   /**栅格 */
-  row(): FormItem {
+  row(): any {
     return {
       type: 'row',
       id: 'row',
@@ -235,7 +287,7 @@ class Maker {
       }
     }
   }
-  col(): FormItem {
+  col(): any {
     return {
       type: 'col',
       id: 'col',

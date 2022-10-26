@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { inject, watch, type Ref } from "vue";
+import { inject, onMounted, ref, watch, type Ref } from "vue";
 import type { FormItem, FormInfo } from "@/views/form/index";
 import draggable from 'vuedraggable'
 import {
@@ -16,7 +16,6 @@ const formInfo: FormInfo = props.formInfo;
 const selectFormItem: FormItem = inject<FormItem>("selectFormItem") as FormItem;
 const isDraggable: Ref<boolean> = inject("isDraggable") as Ref<boolean>;
 const element = props.element;
-
 watch(
   () => selectFormItem,
   (value: FormItem) => {
@@ -26,8 +25,6 @@ watch(
 );
 /**点击事件 */
 function clickHandle(element: FormItem) {
-  console.log(element);
-
   Object.assign(selectFormItem, element);
 }
 /**删除formitem */
@@ -38,13 +35,12 @@ function deleteFormItem() {
   formInfo.list = formInfo.list.filter(
     (item: FormItem) => item.id !== element.id
   );
-
   if (index > 0) {
     Object.assign(selectFormItem, formInfo.list[index - 1]);
   } else if (index === 0 && formInfo.list.length > 0) {
     Object.assign(selectFormItem, formInfo.list[index]);
   } else {
-    selectFormItem.field = "";
+    selectFormItem.id = "";
   }
 }
 /**添加formitem */
@@ -111,205 +107,120 @@ watch(
 /**点击栅格 */
 function clickRow(element: FormItem) {
   Object.assign(selectFormItem, element);
-  console.log(element);
 }
+
+
 </script>
 
 <template>
   <div class="form-main-item">
     <!-- 拖动图标 -->
-    <div
-      class="form-main-item-draggable"
-      v-if="selectFormItem.id === element.id"
-      @mouseenter.passive="mouseenterHandle"
-      @mouseleave="mouseleaveHandle"
-      @mousedown="mousedownHandle"
-      @click="clickDraggableHandle()"
-    >
+    <div class="form-main-item-draggable" v-if="selectFormItem.id === element.id" @mouseenter.passive="mouseenterHandle"
+      @mouseleave="mouseleaveHandle" @mousedown="mousedownHandle" @click="clickDraggableHandle()">
       <el-icon color="white" :size="20">
         <Rank />
       </el-icon>
     </div>
     <!-- 组件操作 -->
     <div class="form-main-item-operate" v-if="selectFormItem.id === element.id">
-      <el-button
-        link
-        type="primary"
-        title="添加"
-        :icon="CirclePlus"
-        @click="addFormItem"
-      >
+      <el-button link type="primary" title="添加" :icon="CirclePlus" @click="addFormItem">
       </el-button>
-      <el-button
-        link
-        type="primary"
-        title="复制"
-        :icon="CopyDocument"
-        @click="copyFormItem"
-      >
+      <el-button link type="primary" title="复制" :icon="CopyDocument" @click="copyFormItem">
       </el-button>
-      <el-button
-        link
-        type="danger"
-        title="删除"
-        :icon="Delete"
-        @click="deleteFormItem"
-      >
+      <el-button link type="danger" title="删除" :icon="Delete" @click="deleteFormItem">
       </el-button>
     </div>
     <!-- 组件主体 -->
-    <el-form-item
-      :class="`form-main-item-label ${
-        selectFormItem.id == element.id ? 'form-main-item-active' : ''
-      }`"
-      :label="element.title"
-      :label-width="element.title === '' ? '0px' : ''"
-      :style="`width:100%;height:${element.props.height};display:${
-        element.title === '' ? 'flex' : ''
-      }`"
-      @click.prevent.stop="clickHandle(element)"
-      v-if="element.type !== 'row'"
-    >
-      <!-- 标题 -->
-      <div
-        v-if="element.type === 'text'"
-        :style="`width:${element.props.width};text-align:${element.props.position};color:${element.props.textColor};font-size:${element.props.fontSize}`"
-      >
+    <el-form-item :class="`form-main-item-label ${selectFormItem.id == element.id ? 'form-main-item-active' : ''
+    }`" :label="element.title" :label-width="element.title === '' ? '0px' : ''" v-if="element.type !== 'row'"
+      :required="element.required">
+      <!-- 文本 -->
+      <div v-if="element.type === 'text'"
+        :style="`width:${element.props.width};text-align:${element.props.position};color:${element.props.textColor};font-size:${element.props.fontSize}`">
         {{ element.value }}
       </div>
+
       <!-- 单行输入 -->
-      <el-input
-        v-if="element.type === 'input'"
-        v-model="element.value"
-        :placeholder="element.props.placeholder"
-        :style="`width:${element.props.width};`"
-      ></el-input>
-      <!-- 多行输入 -->
-      <el-input
-        type="textarea"
-        v-if="element.type === 'textarea'"
-        v-model="element.value"
-        :style="`width:${element.props.width};`"
-        :placeholder="element.props.placeholder"
-      >
-      </el-input>
+      <el-input :type="element.props.type" v-if="element.type === 'input'" v-model="element.value"
+        :clearable="element.props.clearable" :disabled="element.props.disabled" :rows="element.props.rows"
+        :placeholder="element.props.placeholder" :resize="element.props.resize" :autocomplete="element.props.resize"
+        :autofocus="element.props.autofocus" :show-password="element.props.showPassword"
+        :minlength="element.props.minlength" :maxlength="element.props.maxlength"
+        :show-word-limit="element.props.showWordLimit" style="width: 100%;"></el-input>
       <!-- 数字输入 -->
-      <el-input-number
-        v-if="element.type === 'number'"
-        v-model="element.value"
-        :style="`width:${element.props.width};`"
-        :placeholder="element.props.placeholder"
-      >
+      <el-input-number v-if="element.type === 'number'" v-model="element.value" :placeholder="element.props.placeholder"
+        :controls="element.props.controls" :controls-position="element.props.controlsPosition"
+        :step="element.props.step" :step-strictly="element.props.stepStrictly" :min="element.props.min"
+        :max="element.props.max" :precision="element.props.precision">
       </el-input-number>
       <!-- 单选框 -->
-      <el-radio-group
-        v-if="element.type === 'radio'"
-        v-model="element.value"
-        :style="`width:${element.props.width};`"
-        :placeholder="element.props.placeholder"
-      >
-        <el-radio
-          v-for="item in element.props.options"
-          :label="item.label"
-          :value="item.value"
-        ></el-radio>
+      <el-radio-group v-if="element.type === 'radio'" v-model="element.value" :placeholder="element.props.placeholder"
+        :text-color="element.props.textColor" :fill="element.props.fill" :disabled="element.props.disabled">
+        <div v-if="element.props.isButton">
+          <el-radio-button v-for="item in element.data" :label="item.label" :value="item.value"></el-radio-button>
+        </div>
+        <div v-else>
+          <el-radio v-for="item in element.data" :label="item.label" :value="item.value" :border="element.props.border">
+          </el-radio>
+        </div>
       </el-radio-group>
       <!-- 多选框 -->
-      <el-checkbox-group
-        v-if="element.type === 'checkbox'"
-        v-model="element.value"
-        :style="`width:${element.props.width};`"
-        :placeholder="element.props.placeholder"
-      >
-        <el-checkbox
-          v-for="item in element.props.options"
-          :label="item.label"
-        ></el-checkbox>
+      <el-checkbox-group v-if="element.type === 'checkbox'" v-model="element.value"
+        :placeholder="element.props.placeholder" :text-color="element.props.textColor" :fill="element.props.fill"
+        :disabled="element.props.disabled" :max="element.props.max" :min="element.props.min">
+        <div v-if="element.props.isButton">
+          <el-checkbox-button v-for="item in element.data" :label="item.label" :value="item.value">
+          </el-checkbox-button>
+        </div>
+        <div v-else>
+          <el-checkbox v-for="item in element.data" :label="item.label" :border="element.props.border">
+          </el-checkbox>
+        </div>
       </el-checkbox-group>
       <!-- 选择框 -->
-      <el-select
-        v-if="element.type === 'select'"
-        v-model="element.value"
-        :style="`width:${element.props.width};`"
-        :placeholder="element.props.placeholder"
-      >
-        <el-option
-          v-for="item in element.props.options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value"
-          :placeholder="element.props.placeholder"
-        />
+      <el-select v-if="element.type === 'select'" v-model="element.value" :placeholder="element.props.placeholder"
+        :multiple="element.props.multiple" :disabled="element.props.disabled" :clearable="element.props.clearable"
+        :collapse-tags="element.props.collapseTags" :multiple-limit="element.props.multipleLimit"
+        :no-data-text="element.props.noDataText" :no-match-text="element.props.noMatchText"
+        :filterable="element.props.filterable" style="width: 100%;" collapse-tags-tooltip>
+        <el-option v-for="item in element.data" :key="item.value" :label="item.label" :value="item.value" />
       </el-select>
-      <!-- 时间日期选择器 -->
-      <el-date-picker
-        v-if="['date', 'datetime'].includes(element.type)"
-        v-model="element.value"
-        :type="element.type"
-        :format="element.props.format"
-        :style="`width:${element.props.width};`"
-        :placeholder="element.props.placeholder"
-      />
+      <!-- 日期选择器 -->
+      <el-date-picker v-if="element.type === 'datetime'" v-model="element.value" :type="element.props.type"
+        :format="element.props.format" :placeholder="element.props.placeholder" :editable="element.props.editable"
+        :end-placeholder="element.props.endPlaceholder" :start-placeholder="element.props.startPlaceholder"
+        :clearable="element.props.clearable" :value-format="element.props.valueFormat"
+        :disabled="element.props.disabled" :range-separator="element.props.rangeSeparator"
+        :unlink-panels="element.props.unlinkPanels" />
+      <!-- 事件选择器 -->
+      <el-time-picker v-if="element.type === 'time'" v-model="element.value" :placeholder="element.props.placeholder"
+        :editable="element.props.editable" :end-placeholder="element.props.endPlaceholder"
+        :start-placeholder="element.props.startPlaceholder" :clearable="element.props.clearable"
+        :disabled="element.props.disabled" :is-range="element.props.isRange"
+        :arrow-control="element.props.arrowControl" />
       <!--评分-->
-      <el-rate
-        v-if="element.type === 'rate'"
-        v-model="element.value"
-        :style="`width:${element.props.width};`"
-      />
+      <el-rate v-if="element.type === 'rate'" v-model="element.value" :style="`width:${element.props.width};`" />
       <!-- 开关 -->
-      <el-switch
-        v-if="element.type === 'switch'"
-        v-model="element.value"
-        inline-prompt
-        active-text="是"
-        inactive-text="否"
-        :style="`width:${element.props.width};`"
-      />
+      <el-switch v-if="element.type === 'switch'" v-model="element.value" inline-prompt active-text="是"
+        inactive-text="否" :style="`width:${element.props.width};`" />
       <!-- 滑块 -->
-      <el-slider
-        v-if="element.type === 'slider'"
-        v-model="element.value"
-        :style="`width:${element.props.width};`"
-      />
+      <el-slider v-if="element.type === 'slider'" v-model="element.value" :style="`width:${element.props.width};`" />
       <!-- 颜色选择器 -->
-      <el-color-picker
-        v-if="element.type === 'color'"
-        v-model="element.value"
-      />
+      <el-color-picker v-if="element.type === 'color'" v-model="element.value" />
     </el-form-item>
-    <el-row
-      v-else
-      class="form-main-row"
-      @click.prevent.stop="clickRow(element)"
-      :gutter="element.props.gutter"
-    >
-      <el-col
-        v-for="item in element.props.list"
-        class="form-main-col"
-        :span="item.props.span"
-        @click.prevent.stop="clickRow(item)"
-      >
-        <draggable
-          :list="item.props.list"
-          group="people"
-          item-key="id"
-          :force-fallback="true"
-          ghost-class="form-main-ghost"
-          drag-class="form-main-drag"
-          style="min-height: 70px"
-          :disabled="!isDraggable"
-          @end="isDraggable = false"
-        >
+    <el-row v-else class="form-main-row" @click.prevent.stop="clickRow(element)" :gutter="element.props.gutter">
+      <el-col v-for="item in element.props.list" class="form-main-col" :span="item.props.span"
+        @click.prevent.stop="clickRow(item)">
+        <draggable :list="item.props.list" group="people" item-key="id" :force-fallback="true"
+          ghost-class="form-main-ghost" drag-class="form-main-drag" style="min-height: 70px" :disabled="!isDraggable"
+          @end="isDraggable = false">
           <template #item="el">
-            <form-item
-              :element="el.element"
-              style="height: 100%"
-              :formInfo="item"
-            ></form-item>
+            <form-item :element="el.element" style="height: 100%" :formInfo="item"></form-item>
           </template>
         </draggable>
       </el-col>
     </el-row>
+    <div class="form-main-item-mask" @click.prevent.stop="clickHandle(element)"></div>
   </div>
 </template>
 
@@ -318,8 +229,10 @@ function clickRow(element: FormItem) {
   margin-bottom: 5px !important;
   padding-bottom: 20px;
 }
+
 .form-main-item {
   position: relative;
+
   .form-main-item-draggable {
     position: absolute;
     top: 0px;
@@ -347,6 +260,15 @@ function clickRow(element: FormItem) {
     }
   }
 
+  .form-main-item-mask {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: 1890;
+  }
+
   .form-main-item-operate {
     position: absolute;
     bottom: 0px;
@@ -358,6 +280,7 @@ function clickRow(element: FormItem) {
     border: 1px solid #409eff;
   }
 }
+
 .form-main-ghost {
   border-left: 1px solid #409eff;
   background: #b3d8ff;
