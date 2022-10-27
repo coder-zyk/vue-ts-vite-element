@@ -60,10 +60,10 @@ function copyFormItem() {
     (item: FormItem) => item.id === element.id
   );
   let formItem: FormItem = maker[element.type]();
+  Object.assign(formItem, element);
   formItem.id = `${formItem.id}_${new Date().getTime()}_${(
     Math.random() * 1000000
   ).toFixed(0)}`;
-  Object.assign(formItem, element);
   formInfo.list.splice(index + 1, 0, formItem);
 }
 /**标识是否需要改变拖动状态
