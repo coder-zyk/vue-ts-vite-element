@@ -1,5 +1,4 @@
-import { inputProps } from "element-plus"
-import type { InputFormItem, RadioFormItem, InputNumberFormItem, CheckboxFormItem, SelectFormItem, DateFormItem, TimeFormItem } from "."
+import type { InputFormItem, RadioFormItem, InputNumberFormItem, CheckboxFormItem, SelectFormItem, DateFormItem, TimeFormItem, ColorPickerFormItem, SwitchFormItem, RateFormItem, SliderFormItem } from "."
 
 class Maker {
   /**索引签名
@@ -208,53 +207,77 @@ class Maker {
     }
   }
   /**评分 */
-  rate(): any {
+  rate(): RateFormItem {
     return {
       type: 'rate',
       id: 'rate',
       title: '评分',
       field: 'rate',
       value: 0,
+      required: false,
       props: {
+        showScore: false,
         disabled: false,
+        allowHalf: false,
+        max: 5,
+        voidColor: '#C6D1DE'
       }
     }
   }
   /**颜色选择 */
-  color(): any {
+  color(): ColorPickerFormItem {
     return {
       type: 'color',
       id: 'color',
       title: '颜色选择器',
       field: 'color',
       value: '',
+      required: false,
       props: {
         disabled: false,
+        showAlpha: false,
       }
     }
   }
   /**开关 */
-  switch(): any {
+  switch(): SwitchFormItem {
     return {
       type: 'switch',
       id: 'switch',
       title: '开关',
       field: 'switch',
       value: false,
+      required: false,
       props: {
         disabled: false,
+        activeText: '是',
+        inactiveText: '否',
+        activeValue: true,
+        inactiveValue: false,
+        inlinePrompt: false
       }
     }
   }
   /**滑块 */
-  slider(): any {
+  slider(): SliderFormItem {
     return {
       type: 'slider',
       id: 'slider',
       title: '滑块',
       field: 'slider',
+      required: false,
       value: 0,
       props: {
+        disabled: false,
+        max: 100,
+        min: 0,
+        step: 1,
+        showInput: false,
+        showInputControls: true,
+        showStops: false,
+        range: false,
+        height: '50px',
+        vertical: false
       }
     }
   }

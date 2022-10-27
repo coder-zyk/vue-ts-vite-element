@@ -192,21 +192,31 @@ function clickRow(element: FormItem) {
         :clearable="element.props.clearable" :value-format="element.props.valueFormat"
         :disabled="element.props.disabled" :range-separator="element.props.rangeSeparator"
         :unlink-panels="element.props.unlinkPanels" />
-      <!-- 事件选择器 -->
+      <!-- 时间选择器 -->
       <el-time-picker v-if="element.type === 'time'" v-model="element.value" :placeholder="element.props.placeholder"
         :editable="element.props.editable" :end-placeholder="element.props.endPlaceholder"
         :start-placeholder="element.props.startPlaceholder" :clearable="element.props.clearable"
         :disabled="element.props.disabled" :is-range="element.props.isRange"
         :arrow-control="element.props.arrowControl" />
-      <!--评分-->
-      <el-rate v-if="element.type === 'rate'" v-model="element.value" :style="`width:${element.props.width};`" />
-      <!-- 开关 -->
-      <el-switch v-if="element.type === 'switch'" v-model="element.value" inline-prompt active-text="是"
-        inactive-text="否" :style="`width:${element.props.width};`" />
-      <!-- 滑块 -->
-      <el-slider v-if="element.type === 'slider'" v-model="element.value" :style="`width:${element.props.width};`" />
       <!-- 颜色选择器 -->
-      <el-color-picker v-if="element.type === 'color'" v-model="element.value" />
+      <el-color-picker v-if="element.type === 'color'" v-model="element.value" :disabled="element.props.disabled"
+        :show-alpha="element.props.showAlpha" />
+      <!-- 开关 -->
+      <el-switch v-if="element.type === 'switch'" v-model="element.value" :active-text="element.props.activeText"
+        :inactive-text="element.props.inactiveText" :active-value="element.props.activeValue"
+        :inactive-value="element.props.inactiveValue" :disabled="element.props.disabled"
+        :inline-prompt="element.props.inlinePrompt" />
+      <!--评分-->
+      <el-rate v-if="element.type === 'rate'" v-model="element.value" :disabled="element.props.disabled"
+        :allow-half="element.props.allowHalf" :max="element.props.max" :void-color="element.props.voidColor"
+        :show-score="element.props.showScore" />
+      <!-- 滑块 -->
+      <el-slider v-if="element.type === 'slider'" v-model="element.value" :max="element.props.max"
+        :min="element.props.min" :show-input="element.props.showInput"
+        :show-input-controls="element.props.showInputControls" :show-stops="element.props.showStops"
+        :height="element.props.height" :step="element.props.step" :vertical="element.props.vertical"
+        :range="element.props.range" />
+
     </el-form-item>
     <el-row v-else class="form-main-row" @click.prevent.stop="clickRow(element)" :gutter="element.props.gutter">
       <el-col v-for="item in element.props.list" class="form-main-col" :span="item.props.span"

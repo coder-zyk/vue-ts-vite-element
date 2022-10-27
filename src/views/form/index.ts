@@ -150,18 +150,53 @@ interface TimeFormItem extends FormItem {
     startPlaceholder: string,
     endPlaceholder: string,
     isRange: boolean,
-    arrowControl:boolean
+    arrowControl: boolean
   }
 }
 /**颜色选择器配置 */
-interface ColorPickFormItem extends FormItem {
-}
-/**评分配置 */
-interface RatePickFormItem extends FormItem {
+interface ColorPickerFormItem extends FormItem {
+  props: {
+    disabled: boolean,
+    showAlpha: boolean,
+  }
 }
 /**开关配置 */
 interface SwitchFormItem extends FormItem {
+  props: {
+    disabled: boolean,
+    activeText: string,
+    inactiveText: string,
+    activeValue: boolean | string | number,
+    inactiveValue: boolean | string | number,
+    inlinePrompt: boolean
+  }
 }
+/**评分配置 */
+interface RateFormItem extends FormItem {
+  props: {
+    disabled: boolean,
+    max: number,
+    allowHalf: boolean,
+    voidColor: string,
+    showScore: boolean
+  }
+}
+/**滑块配置 */
+interface SliderFormItem extends FormItem {
+  props: {
+    min: number,
+    max: number,
+    disabled: boolean,
+    step: number,
+    showInput: boolean,
+    showInputControls: boolean,
+    showStops: boolean,
+    range: boolean,
+    vertical: boolean,
+    height: string
+  }
+}
+
 /**row配置 */
 interface RowFormItem extends FormItem {
 }
@@ -380,8 +415,9 @@ export {
   DateFormItem,
   TimeFormItem,
   SelectFormItem,
-  ColorPickFormItem,
-  RatePickFormItem,
+  ColorPickerFormItem,
+  RateFormItem,
+  SliderFormItem,
   SwitchFormItem,
   RowFormItem,
   FormInfo,

@@ -9,6 +9,10 @@ import checkboxVue from "./components/checkbox.vue";
 import selectVue from "./components/select.vue";
 import dateTimeVue from './components/dateTime.vue'
 import timeVue from "./components/time.vue";
+import colorPickerVue from "./components/colorPicker.vue";
+import switchVue from './components/switch.vue';
+import rateVue from "./components/rate.vue";
+import sliderVue from "./components/slider.vue";
 
 /**表单信息 */
 const formInfo: FormInfo = inject<FormInfo>("formInfo") as FormInfo;
@@ -73,6 +77,10 @@ watch(
         <select-vue v-if="selectFormItem.type == 'select'" :config-info="selectFormItem"></select-vue>
         <date-time-vue v-if="selectFormItem.type == 'datetime'" :config-info="selectFormItem"></date-time-vue>
         <time-vue v-if="selectFormItem.type == 'time'" :config-info="selectFormItem"></time-vue>
+        <color-picker-vue v-if="selectFormItem.type == 'color'" :config-info="selectFormItem"></color-picker-vue>
+        <switch-vue v-if="selectFormItem.type == 'switch'" :config-info="selectFormItem"></switch-vue>
+        <rate-vue v-if="selectFormItem.type == 'rate'" :config-info="selectFormItem"></rate-vue>
+        <slider-vue v-if="selectFormItem.type == 'slider'" :config-info="selectFormItem"></slider-vue>
       </el-scrollbar>
     </el-tab-pane>
   </el-tabs>
