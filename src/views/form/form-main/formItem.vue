@@ -60,7 +60,7 @@ function copyFormItem() {
     (item: FormItem) => item.id === element.id
   );
   let formItem: FormItem = maker[element.type]();
-  Object.assign(formItem, element);
+  Object.assign(formItem, JSON.parse(JSON.stringify(element)));
   formItem.id = `${formItem.id}_${new Date().getTime()}_${(
     Math.random() * 1000000
   ).toFixed(0)}`;
@@ -235,11 +235,6 @@ function clickRow(element: FormItem) {
 </template>
 
 <style scoped lang="scss">
-:deep(.el-form-item) {
-  margin-bottom: 5px !important;
-  padding-bottom: 20px;
-}
-
 .form-main-item {
   position: relative;
 
@@ -255,6 +250,7 @@ function clickRow(element: FormItem) {
   }
 
   .form-main-item-label {
+
     user-select: none;
     width: 100%;
     padding: 5px;
