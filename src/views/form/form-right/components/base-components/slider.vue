@@ -1,5 +1,5 @@
 <script setup lang="ts">import { inject } from 'vue';
-import type { SliderFormItem } from '../..';
+import type { SliderFormItem } from '@/views/form/index';
 const configInfo: SliderFormItem = inject<SliderFormItem>("selectFormItem") as SliderFormItem;
 </script>
 <template>

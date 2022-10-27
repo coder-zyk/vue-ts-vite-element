@@ -246,14 +246,14 @@ class Maker {
       id: 'switch',
       title: '开关',
       field: 'switch',
-      value: false,
+      value: true,
       required: false,
       props: {
         disabled: false,
         activeText: '是',
         inactiveText: '否',
-        activeValue: true,
-        inactiveValue: false,
+        activeValue: 'true',
+        inactiveValue: 'false',
         inlinePrompt: false
       }
     }

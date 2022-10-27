@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { inject } from 'vue';
-import type { DateFormItem } from '../..';
+import type { TimeFormItem } from '@/views/form/index';
 
-const configInfo: DateFormItem = inject<DateFormItem>("selectFormItem") as DateFormItem;
+const configInfo: TimeFormItem = inject<TimeFormItem>("selectFormItem") as TimeFormItem;
 
 </script>
 <template>
@@ -26,18 +26,6 @@ const configInfo: DateFormItem = inject<DateFormItem>("selectFormItem") as DateF
     <el-form-item label="禁用">
       <el-switch v-model="configInfo.props.disabled" inline-prompt active-text="是" inactive-text="否" />
     </el-form-item>
-    <el-form-item label="显示类型">
-      <el-select v-model="configInfo.props.type">
-        <el-option label="year" value="year"></el-option>
-        <el-option label="month" value="month"></el-option>
-        <el-option label="date" value="date"></el-option>
-        <el-option label="daterange" value="daterange"></el-option>
-        <el-option label="dates" value="dates"></el-option>
-        <el-option label="week" value="week"></el-option>
-        <el-option label="datetime" value="datetime"></el-option>
-        <el-option label="datetimerange" value="datetimerange"></el-option>
-      </el-select>
-    </el-form-item>
     <el-form-item label="文本框可输入">
       <el-switch v-model="configInfo.props.editable" inline-prompt active-text="是" inactive-text="否" />
     </el-form-item>
@@ -47,20 +35,17 @@ const configInfo: DateFormItem = inject<DateFormItem>("selectFormItem") as DateF
     <el-form-item label="非范围选择时的占位内容">
       <el-input v-model="configInfo.props.placeholder" maxlength="99" />
     </el-form-item>
-    <el-form-item label="范围选择时开始日期的占位内容">
+    <el-form-item label="范围选择时开始时间的占位内容">
       <el-input v-model="configInfo.props.startPlaceholder" maxlength="99" />
     </el-form-item>
-    <el-form-item label="范围选择时结束日期的占位内容">
+    <el-form-item label="范围选择时结束时间的占位内容">
       <el-input v-model="configInfo.props.endPlaceholder" maxlength="99" />
     </el-form-item>
-    <el-form-item label="显示在输入框中的格式">
-      <el-input v-model="configInfo.props.valueFormat" />
+    <el-form-item label="是否为时间范围选择">
+      <el-switch v-model="configInfo.props.isRange" inline-prompt active-text="是" inactive-text="否" />
     </el-form-item>
-    <el-form-item label="选择范围时的分隔符">
-      <el-input v-model="configInfo.props.rangeSeparator" />
-    </el-form-item>
-    <el-form-item label="在范围选择器里取消两个日期面板之间的联动">
-      <el-switch v-model="configInfo.props.unlinkPanels" inline-prompt active-text="是" inactive-text="否" />
+    <el-form-item label="是否使用箭头进行时间选择">
+      <el-switch v-model="configInfo.props.arrowControl" inline-prompt active-text="是" inactive-text="否" />
     </el-form-item>
     <el-divider content-position="center">验证规则</el-divider>
     <el-form-item label="字段类型">

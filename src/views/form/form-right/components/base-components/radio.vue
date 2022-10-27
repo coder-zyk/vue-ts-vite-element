@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { inject } from 'vue';
-import type { RadioFormItem } from '../..';
+import type { RadioFormItem } from '@/views/form/index';
 import { Delete, Plus } from '@element-plus/icons-vue';
 
 const configInfo: RadioFormItem = inject<RadioFormItem>("selectFormItem") as RadioFormItem;

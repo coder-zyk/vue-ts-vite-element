@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { inject } from 'vue';
-import type { InputNumberFormItem } from '../..';
+import type { InputNumberFormItem } from '@/views/form/index';
 
 const configInfo: InputNumberFormItem = inject<InputNumberFormItem>("selectFormItem") as InputNumberFormItem;
 

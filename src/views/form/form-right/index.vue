@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { inject, provide, ref, watch, type Ref } from "vue";
 import type { FormInfo } from "@/views/form/index";
-import textVue from "./components/text.vue";
-import inputVue from "./components/input.vue";
-import radioVue from "./components/radio.vue";
-import inputNumberVue from "./components/inputNumber.vue";
-import checkboxVue from "./components/checkbox.vue";
-import selectVue from "./components/select.vue";
-import dateTimeVue from './components/dateTime.vue'
-import timeVue from "./components/time.vue";
-import colorPickerVue from "./components/colorPicker.vue";
-import switchVue from './components/switch.vue';
-import rateVue from "./components/rate.vue";
-import sliderVue from "./components/slider.vue";
+import textVue from "./components/base-components/text.vue";
+import inputVue from "./components/base-components/input.vue";
+import radioVue from "./components/base-components/radio.vue";
+import inputNumberVue from "./components/base-components/inputNumber.vue";
+import checkboxVue from "./components/base-components/checkbox.vue";
+import selectVue from "./components/base-components/select.vue";
+import dateTimeVue from './components/base-components/dateTime.vue'
+import timeVue from "./components/base-components/time.vue";
+import colorPickerVue from "./components/base-components/colorPicker.vue";
+import switchVue from './components/base-components/switch.vue';
+import rateVue from "./components/base-components/rate.vue";
+import sliderVue from "./components/base-components/slider.vue";
 
 /**表单信息 */
 const formInfo: FormInfo = inject<FormInfo>("formInfo") as FormInfo;

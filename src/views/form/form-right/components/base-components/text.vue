@@ -1,5 +1,5 @@
 <script setup lang="ts">import { inject } from 'vue';
-import type { TextFormItem } from '../..';
+import type { TextFormItem } from '@/views/form/index';
 const configInfo: TextFormItem = inject<TextFormItem>("selectFormItem") as TextFormItem;
 </script>
 <template>

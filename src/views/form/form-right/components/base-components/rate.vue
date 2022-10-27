@@ -1,5 +1,5 @@
 <script setup lang="ts">import { inject } from 'vue';
-import type { RateFormItem } from '../..';
+import type { RateFormItem } from '@/views/form/index';
 const configInfo: RateFormItem = inject<RateFormItem>("selectFormItem") as RateFormItem;
 </script>
 <template>
