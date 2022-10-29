@@ -92,15 +92,18 @@ const showPreviewForm: Ref<boolean> = ref(false)
       </el-scrollbar>
     </el-form>
     <el-dialog v-model="showPreviewForm" :title="formInfo.config.name" destroy-on-close :close-on-click-modal="false">
-      <preview-form-vue :form-info="formInfo"></preview-form-vue>
-      <template #footer>
-        <el-space alignment="end">
-          <el-button @click="showPreviewForm = false">取消</el-button>
-          <el-button type="primary" @click="showPreviewForm = false">
-            确定
-          </el-button>
-        </el-space>
-      </template>
+      <el-scrollbar max-height="60vh">
+        <preview-form-vue :form-info="formInfo"></preview-form-vue>
+        <template #footer>
+          <el-space alignment="end">
+            <el-button @click="showPreviewForm = false">取消</el-button>
+            <el-button type="primary" @click="showPreviewForm = false">
+              确定
+            </el-button>
+          </el-space>
+        </template>
+      </el-scrollbar>
+
     </el-dialog>
   </div>
 </template>
@@ -116,22 +119,18 @@ const showPreviewForm: Ref<boolean> = ref(false)
   }
 
   .form-main-row {
-    position: relative;
     min-height: 60px;
     user-select: none;
     word-break: break-all;
     border: 1px dashed #409eff;
-    align-items: center;
     margin-bottom: 2px;
     padding: 5px;
 
     .form-main-col {
-      position: relative;
       min-height: 60px;
       user-select: none;
       word-break: break-all;
       border: 1px dashed #409eff;
-      align-items: center;
       margin-bottom: 2px;
       padding: 5px;
     }
