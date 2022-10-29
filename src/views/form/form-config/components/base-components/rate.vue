@@ -9,7 +9,7 @@ const configInfo: RateFormItem = inject<RateFormItem>("selectFormItem") as RateF
       <el-input v-model="configInfo.field" maxlength="99"></el-input>
     </el-form-item>
     <el-form-item label="标签名">
-      <el-input v-model="configInfo.title"></el-input>
+      <el-input v-model="configInfo.label"></el-input>
     </el-form-item>
     <el-form-item label="内容">
       <el-input v-model="configInfo.value" />

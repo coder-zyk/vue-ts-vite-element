@@ -5,7 +5,7 @@ const configInfo: TextFormItem = inject<TextFormItem>("selectFormItem") as TextF
 <template>
   <el-form label-position="top">
     <el-form-item label="标签名">
-      <el-input v-model="configInfo.title" />
+      <el-input v-model="configInfo.label" />
     </el-form-item>
     <el-form-item label="文本位置">
       <el-radio-group v-model="configInfo.props.position">

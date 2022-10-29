@@ -8,12 +8,15 @@ const configInfo: InputFormItem = inject<InputFormItem>("selectFormItem") as Inp
 <template>
   <el-form label-position="top">
     <el-divider content-position="center">基础配置</el-divider>
+    <el-form-item label="唯一标识">
+      {{ configInfo.id }}
+    </el-form-item>
     <el-form-item label="字段ID">
       <el-input v-model="configInfo.field" maxlength="99">
       </el-input>
     </el-form-item>
     <el-form-item label="标签名">
-      <el-input v-model="configInfo.title"></el-input>
+      <el-input v-model="configInfo.label"></el-input>
     </el-form-item>
     <el-form-item label="内容">
       <el-input v-model="configInfo.value" />

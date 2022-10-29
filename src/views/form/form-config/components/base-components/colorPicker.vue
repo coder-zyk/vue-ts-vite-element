@@ -1,6 +1,6 @@
 <script setup lang="ts">import { inject } from 'vue';
-import type { SwitchFormItem } from '@/views/form/index';
-const configInfo: SwitchFormItem = inject<SwitchFormItem>("selectFormItem") as SwitchFormItem;
+import type { ColorPickerFormItem } from '@/views/form/index';
+const configInfo: ColorPickerFormItem = inject<ColorPickerFormItem>("selectFormItem") as ColorPickerFormItem;
 </script>
 <template>
   <el-form label-position="top">
@@ -9,7 +9,7 @@ const configInfo: SwitchFormItem = inject<SwitchFormItem>("selectFormItem") as S
       <el-input v-model="configInfo.field" maxlength="99"></el-input>
     </el-form-item>
     <el-form-item label="标签名">
-      <el-input v-model="configInfo.title"></el-input>
+      <el-input v-model="configInfo.label"></el-input>
     </el-form-item>
     <el-form-item label="内容">
       <el-input v-model="configInfo.value" />
@@ -23,20 +23,8 @@ const configInfo: SwitchFormItem = inject<SwitchFormItem>("selectFormItem") as S
     <el-form-item label="是否禁用">
       <el-switch v-model="configInfo.props.disabled" inline-prompt active-text="是" inactive-text="否" />
     </el-form-item>
-    <el-form-item label="是否在开关内显示字">
-      <el-switch v-model="configInfo.props.inlinePrompt" inline-prompt active-text="是" inactive-text="否" />
-    </el-form-item>
-    <el-form-item label="switch 打开时的文字描述">
-      <el-input v-model="configInfo.props.activeText"></el-input>
-    </el-form-item>
-    <el-form-item label="switch 关闭时的文字描述">
-      <el-input v-model="configInfo.props.inactiveText"></el-input>
-    </el-form-item>
-    <el-form-item label="switch 打开时的值">
-      <el-input v-model="configInfo.props.activeValue"></el-input>
-    </el-form-item>
-    <el-form-item label="switch 关闭时的值">
-      <el-input v-model="configInfo.props.inactiveValue"></el-input>
+    <el-form-item label="是否支持透明度">
+      <el-switch v-model="configInfo.props.showAlpha" inline-prompt active-text="是" inactive-text="否" />
     </el-form-item>
     <el-divider content-position="center">验证规则</el-divider>
     <el-form-item label="字段类型">

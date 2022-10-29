@@ -9,7 +9,7 @@ interface FormConfig {
   name: string,
   labelWidth: number,
   labelPosition: 'right' | 'top' | 'left',
-  labelSize: 'small' | 'default' | 'large',
+  size: 'small' | 'default' | 'large',
   dbName: {
     name: string,
     dbId: number,
@@ -17,8 +17,9 @@ interface FormConfig {
 }
 /**组件信息 */
 interface FormItem {
+  [key: string]: any
   /**组件的label */
-  title: string,
+  label: string,
   /**组件的唯一标识 */
   id: string,
   /**组件的类型 */
@@ -32,7 +33,9 @@ interface FormItem {
   /**组件验证规则 */
   validate?: Array<any>
   /**栅格布局 */
-  col?: any
+  row?: any,
+  /**参数 */
+  props?: any
 }
 /**文本配置 */
 interface TextFormItem extends FormItem {
@@ -199,6 +202,22 @@ interface SliderFormItem extends FormItem {
 
 /**row配置 */
 interface RowFormItem extends FormItem {
+  props: {
+    gutter: number,
+    justify: string,
+    align: string,
+    children: Array<ColFormItem>
+  }
+}
+/**row配置 */
+interface ColFormItem extends FormItem {
+  props: {
+    span: number,
+    offset: number,
+    push: number,
+    pull: number,
+    children: Array<FormItem>,
+  }
 }
 /**组件的具体配置 */
 const formBaseItems = [
@@ -420,6 +439,7 @@ export {
   SliderFormItem,
   SwitchFormItem,
   RowFormItem,
+  ColFormItem,
   FormInfo,
   FormConfig,
   formBaseItems,

@@ -13,6 +13,8 @@ import colorPickerVue from "./components/base-components/colorPicker.vue";
 import switchVue from './components/base-components/switch.vue';
 import rateVue from "./components/base-components/rate.vue";
 import sliderVue from "./components/base-components/slider.vue";
+import rowVue from "./components/layout-components/row.vue";
+import colVue from './components/layout-components/col.vue'
 
 /**表单信息 */
 const formInfo: FormInfo = inject<FormInfo>("formInfo") as FormInfo;
@@ -59,7 +61,7 @@ watch(
           </el-radio-group>
         </el-form-item>
         <el-form-item label="标签大小">
-          <el-radio-group v-model="formInfo.config.labelSize">
+          <el-radio-group v-model="formInfo.config.size">
             <el-radio-button label="small" />
             <el-radio-button label="default" />
             <el-radio-button label="large" />
@@ -81,6 +83,8 @@ watch(
         <switch-vue v-if="selectFormItem.type == 'switch'" :config-info="selectFormItem"></switch-vue>
         <rate-vue v-if="selectFormItem.type == 'rate'" :config-info="selectFormItem"></rate-vue>
         <slider-vue v-if="selectFormItem.type == 'slider'" :config-info="selectFormItem"></slider-vue>
+        <row-vue v-if="selectFormItem.type == 'row'" :config-info="selectFormItem"></row-vue>
+        <col-vue v-if="selectFormItem.type == 'col'" :config-info="selectFormItem"></col-vue>
       </el-scrollbar>
     </el-tab-pane>
   </el-tabs>
