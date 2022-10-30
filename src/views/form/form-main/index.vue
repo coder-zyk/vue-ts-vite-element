@@ -12,16 +12,27 @@ import { ElMessage } from "element-plus";
 const formInfo: FormInfo = inject<FormInfo>("formInfo") as FormInfo;
 /**当前选中的元素 */
 const selectFormItem: FormItem = inject<FormItem>("selectFormItem") as FormItem;
+const formList: Array<FormInfo> = inject("formList") as Array<FormInfo>;
 /**保存表单 */
 function saveForm() {
-  localStorage.setItem('layout', JSON.stringify(formInfo))
+  if (formInfo.id == 0) {
+    formInfo.id = new Date().getTime() + (Math.random() * 100000).toFixed(0)
+    formList.push(JSON.parse(JSON.stringify(formInfo)))
+  } else {
+    formList.map((item: FormInfo) => {
+      if (item.id == formInfo.id) {
+        Object.assign(item, JSON.parse(JSON.stringify(formInfo)))
+      }
+      return item
+    })
+  }
+  localStorage.setItem('formList', JSON.stringify(formList))
   ElMessage.success('保单保存成功')
 }
 /**清空表单确认 */
 const isClearForm: Ref<boolean> = ref(false)
 /**清空表单 */
 function clearForm() {
-  localStorage.removeItem('layout')
   Object.assign(formInfo, {
     id: 0,
     config: {

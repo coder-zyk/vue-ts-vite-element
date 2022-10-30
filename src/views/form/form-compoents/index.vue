@@ -7,13 +7,8 @@ import type {
 } from "@/views/form/index";
 import { maker } from "@/views/form/util";
 import { formComponents, assistComponents, layoutComponents } from './index'
-/**表单信息 */
-const formInfo: FormInfo = inject<FormInfo>("formInfo") as FormInfo;
-/**当前选中的元素 */
-const selectFormItem: FormItem = inject<FormItem>("selectFormItem") as FormItem;
+import formListVue from '../form-list/formList.vue'
 const isDraggable: Ref<boolean> = inject("isDraggable") as Ref<boolean>;
-const formDatas = ref([]);
-
 const activeName: Ref<string> = ref("components");
 /**组件拖动添加 */
 function addFormItem(value: FormItem): FormItem {
@@ -24,13 +19,7 @@ function addFormItem(value: FormItem): FormItem {
   ).toFixed(0)}`;
   return temp;
 }
-/**点击表单模板,获取表单信息 */
-function rowClickHandel(row: any) {
-  selectFormItem.field = "";
-  formInfo.id = row.id;
-  formInfo.list = JSON.parse(row.list);
-  formInfo.config = JSON.parse(row.config);
-}
+
 /**拖动开始 */
 function start() {
 
@@ -88,9 +77,7 @@ function end() {
     </el-tab-pane>
     <el-tab-pane label="表单模板" name="template" style="height:100%">
       <el-scrollbar>
-        <el-table :data="formDatas" border style="width: 100%" @row-click="rowClickHandel">
-          <el-table-column prop="id" label="id" width="50" />
-        </el-table>
+        <form-list-vue></form-list-vue>
       </el-scrollbar>
     </el-tab-pane>
   </el-tabs>

@@ -1,6 +1,6 @@
 /**表单信息 */
 interface FormInfo {
-  id: number,
+  id: number|string,
   config: FormConfig,
   list: Array<FormItem>
 }

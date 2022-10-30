@@ -5,8 +5,9 @@ import formMain from "./form-main/index.vue";
 import formConfig from "./form-config/index.vue";
 import { reactive, ref, watch, provide, type Ref } from "vue";
 import './style/common.scss'
-
-
+/**表单列表 */
+const formList: Ref<Array<FormInfo>> = ref([]);
+formList.value = JSON.parse(localStorage.getItem('formList') as string) ?? []
 /**表单信息 */
 const formInfo: FormInfo = reactive({
   id: 0,
@@ -22,8 +23,6 @@ const formInfo: FormInfo = reactive({
   },
   list: new Array<FormItem>,
 });
-Object.assign(formInfo, JSON.parse(localStorage.getItem('layout') as string))
-
 /**选中的Item */
 const selectFormItem: FormItem = reactive({
   label: "",
@@ -42,6 +41,7 @@ provide("isDraggable", isDraggable);
 provide("selectFormItem", selectFormItem);
 provide("formInfo", formInfo);
 provide("dataTables", dataTables);
+provide("formList", formList.value);
 </script>
   
 <template>
