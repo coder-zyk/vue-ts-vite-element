@@ -119,7 +119,7 @@
   }
 }
 
-.icon-span {
+.icon-text {
   &:before {
     content: "\e788";
   }
@@ -152,11 +152,12 @@
 
 //vue-draggable占位样式
 .form-main-ghost {
-  background: #b3d8ff;
+  height: 5px;
+  background: #75b5f9;
   color: #ffffff00;
 }
 
 .form-main-drag {
   border-left: 1px solid #409eff;
-  background: #b3d8ff;
+  background: #75b5f9;
 }

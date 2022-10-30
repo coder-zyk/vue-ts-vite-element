@@ -49,7 +49,7 @@ const showPreviewForm: Ref<boolean> = ref(false)
 
 <template>
   <el-container class="form-main">
-    <el-header style="height:40px;border-left: 1px var(--el-border-color) var(--el-border-style);border-right: 1px var(--el-border-color) var(--el-border-style);">
+    <el-header style="height:40px;border-left: 1px var(--el-border-color) var(--el-border-style);border-right:1px var(--el-border-color) var(--el-border-style) ;">
       <el-space class="form-main-operate">
         <el-button size="small" link type="primary" :icon="Tickets" @click="saveForm">保存</el-button>
         <el-button size="small" link type="primary" :icon="View" @click="showPreviewForm = true">预览</el-button>

@@ -14,7 +14,7 @@ const configInfo: DateFormItem = inject<DateFormItem>("selectFormItem") as DateF
     <el-form-item label="标签名">
       <el-input v-model="configInfo.label"></el-input>
     </el-form-item>
-    <el-form-item label="内容">
+    <el-form-item label="默认值">
       <el-input v-model="configInfo.value" />
     </el-form-item>
     <el-form-item label="提示信息">

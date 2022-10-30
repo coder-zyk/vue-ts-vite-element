@@ -93,7 +93,7 @@ const assistComponents = [
     label: '按钮',
     icon: ''
   }, {
-    type: 'span',
+    type: 'text',
     label: '文字',
     icon: ''
   }, {

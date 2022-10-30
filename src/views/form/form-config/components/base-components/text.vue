@@ -26,7 +26,7 @@ const configInfo: TextFormItem = inject<TextFormItem>("selectFormItem") as TextF
     <el-form-item label="宽度">
       <el-input v-model="configInfo.props.width" />
     </el-form-item>
-    <el-form-item label="内容">
+    <el-form-item label="默认值">
       <el-input v-model="configInfo.value" />
     </el-form-item>
   </el-form>
