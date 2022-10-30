@@ -218,7 +218,12 @@ interface ColFormItem extends FormItem {
     children: Array<FormItem>,
   }
 }
-
+/**间隔配置 */
+interface SpaceFormItem extends FormItem {
+  props: {
+   height:number
+  }
+}
 export type {
   FormItem,
   TextFormItem,
@@ -236,5 +241,6 @@ export type {
   RowFormItem,
   ColFormItem,
   FormInfo,
-  FormConfig
+  FormConfig,
+  SpaceFormItem
 }

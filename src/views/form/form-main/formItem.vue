@@ -32,8 +32,11 @@ function clickHandle(selectElement: FormItem) {
     <operateButtonVue :form-item="formItem" :form-item-list="props.formItemList"
       v-if="formItem.id == selectFormItem.id">
     </operateButtonVue>
+    <div v-if="['space'].includes(formItem.type)">
+      <div :style="`height:${formItem.props.height}px;width:100%`"></div>
+    </div>
     <el-form-item :label="formItem.label" :label-width="formItem.label === '' ? '0px' : ''"
-      :required="formItem.required" :style="`margin-bottom:${formItem.type == 'text' ? '0px' : undefined}`">
+      :required="formItem.required" :style="`margin-bottom:${formItem.type == 'text' ? '0px' : undefined}`" v-else>
       <!-- 文本 -->
       <span v-if="formItem.type === 'text'"
         :style="`display:grid;width:100%;line-height:${formItem.props.fontSize + 15}px;justify-content:${formItem.props.justify};color:${formItem.props.color};font-size:${formItem.props.fontSize}px`">
@@ -120,7 +123,6 @@ function clickHandle(selectElement: FormItem) {
         :height="formItem.props.height" :step="formItem.props.step" :vertical="formItem.props.vertical"
         :range="formItem.props.range" />
     </el-form-item>
-    <!-- 组件主体 -->
     <div class="form-main-item-mask" @click.prevent.stop="clickHandle(formItem)"></div>
   </div>
 </template>
@@ -128,7 +130,7 @@ function clickHandle(selectElement: FormItem) {
 <style scoped lang="scss">
 .form-main-item {
   position: relative;
-  min-height: 60px;
+  min-height: 20px;
   user-select: none;
   word-break: break-all;
   border: 1px dashed #409eff;

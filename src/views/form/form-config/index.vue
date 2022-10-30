@@ -15,7 +15,7 @@ import rateVue from "./components/base-components/rate.vue";
 import sliderVue from "./components/base-components/slider.vue";
 import rowVue from "./components/layout-components/row.vue";
 import colVue from './components/layout-components/col.vue'
-
+import spaceVue from "./components/layout-components/space.vue";
 /**表单信息 */
 const formInfo: FormInfo = inject<FormInfo>("formInfo") as FormInfo;
 /**当前选中的元素 */
@@ -86,6 +86,7 @@ watch(
         <slider-vue v-if="selectFormItem.type == 'slider'" :config-info="selectFormItem"></slider-vue>
         <row-vue v-if="selectFormItem.type == 'row'" :config-info="selectFormItem"></row-vue>
         <col-vue v-if="selectFormItem.type == 'col'" :config-info="selectFormItem"></col-vue>
+        <space-vue v-if="selectFormItem.type == 'space'" :config-info="selectFormItem"></space-vue>
       </el-scrollbar>
     </el-tab-pane>
   </el-tabs>

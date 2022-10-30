@@ -1,4 +1,4 @@
-import type { TextFormItem, InputFormItem, RadioFormItem, InputNumberFormItem, CheckboxFormItem, SelectFormItem, DateFormItem, TimeFormItem, ColorPickerFormItem, SwitchFormItem, RateFormItem, SliderFormItem, RowFormItem, ColFormItem } from "."
+import type { TextFormItem, InputFormItem, RadioFormItem, InputNumberFormItem, CheckboxFormItem, SelectFormItem, DateFormItem, TimeFormItem, ColorPickerFormItem, SwitchFormItem, RateFormItem, SliderFormItem, RowFormItem, ColFormItem, SpaceFormItem } from "."
 
 class Maker {
   /**索引签名
@@ -16,7 +16,7 @@ class Maker {
       required: false,
       props: {
         height: '',
-        justify:'start',
+        justify: 'start',
         color: '',
         fontSize: 14
       }
@@ -343,6 +343,19 @@ class Maker {
         offset: 0,
         span: 12,
         children: []
+      },
+    }
+  }
+  space(): SpaceFormItem {
+    return {
+      type: 'space',
+      id: 'space',
+      label: '',
+      field: 'space',
+      value: '',
+      required: false,
+      props: {
+        height: 10
       },
     }
   }

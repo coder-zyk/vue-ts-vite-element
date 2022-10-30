@@ -5,8 +5,11 @@ const props = defineProps(['formItemInfo'])
 const formItem: FormItem = props.formItemInfo
 </script>
 <template>
+  <div v-if="['space'].includes(formItem.type)">
+    <div :style="`height:${formItem.props.height}px;width:100%`"></div>
+  </div>
   <el-form-item :label="formItem.label" :label-width="formItem.label === '' ? '0px' : ''" :required="formItem.required"
-    :style="`margin-bottom:${formItem.type == 'text' ? '0px' : undefined}`">
+    :style="`margin-bottom:${formItem.type == 'text' ? '0px' : undefined}`" v-else>
     <!-- 文本 -->
     <span v-if="formItem.type === 'text'"
       :style="`display:grid;width:100%;line-height:${formItem.props.fontSize + 15}px;justify-content:${formItem.props.justify};color:${formItem.props.color};font-size:${formItem.props.fontSize}px`">
