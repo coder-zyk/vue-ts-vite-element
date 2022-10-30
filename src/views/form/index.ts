@@ -29,7 +29,7 @@ interface FormItem {
   /**是否必填 */
   required: boolean,
   /**组件的值 */
-  value: string | number | Array<any> | boolean
+  value: any
   /**组件验证规则 */
   validate?: Array<any>
   /**栅格布局 */
@@ -168,8 +168,8 @@ interface SwitchFormItem extends FormItem {
     disabled: boolean,
     activeText: string,
     inactiveText: string,
-    activeValue: boolean | string | number,
-    inactiveValue: boolean | string | number,
+    activeValue: any,
+    inactiveValue: any,
     inlinePrompt: boolean
   }
 }
