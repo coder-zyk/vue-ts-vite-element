@@ -1,23 +1,24 @@
-import type { InputFormItem, RadioFormItem, InputNumberFormItem, CheckboxFormItem, SelectFormItem, DateFormItem, TimeFormItem, ColorPickerFormItem, SwitchFormItem, RateFormItem, SliderFormItem, RowFormItem, ColFormItem } from "."
+import type { TextFormItem, InputFormItem, RadioFormItem, InputNumberFormItem, CheckboxFormItem, SelectFormItem, DateFormItem, TimeFormItem, ColorPickerFormItem, SwitchFormItem, RateFormItem, SliderFormItem, RowFormItem, ColFormItem } from "."
 
 class Maker {
   /**索引签名
    */
   [index: string]: any
 
-  /**文本 */
-  text(): any {
+  /**文字 */
+  text(): TextFormItem {
     return {
       type: 'text',
       id: 'text',
-      label: '文本',
+      label: '文字',
       field: 'text',
-      value: 'text',
+      value: '这是一段文字',
+      required: false,
       props: {
-        height: '50px',
-        width: '100%',
-        position: 'left',
-        textColor: 'red',
+        height: '',
+        justify:'start',
+        color: '',
+        fontSize: 14
       }
     }
   }

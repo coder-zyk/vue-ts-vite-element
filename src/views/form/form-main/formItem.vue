@@ -33,12 +33,12 @@ function clickHandle(selectElement: FormItem) {
       v-if="formItem.id == selectFormItem.id">
     </operateButtonVue>
     <el-form-item :label="formItem.label" :label-width="formItem.label === '' ? '0px' : ''"
-      :required="formItem.required">
+      :required="formItem.required" :style="`margin-bottom:${formItem.type == 'text' ? '0px' : undefined}`">
       <!-- 文本 -->
-      <div v-if="formItem.type === 'text'"
-        :style="`height:${formItem.props.height};width:${formItem.props.width};text-align:${formItem.props.position};color:${formItem.props.textColor};font-size:${formItem.props.fontSize}`">
+      <span v-if="formItem.type === 'text'"
+        :style="`display:grid;width:100%;line-height:${formItem.props.fontSize + 15}px;justify-content:${formItem.props.justify};color:${formItem.props.color};font-size:${formItem.props.fontSize}px`">
         {{ formItem.value }}
-      </div>
+      </span>
       <!-- 单行输入 -->
       <el-input :type="formItem.props.type" v-if="formItem.type === 'input'" v-model="formItem.value"
         :clearable="formItem.props.clearable" :disabled="formItem.props.disabled" :rows="formItem.props.rows"

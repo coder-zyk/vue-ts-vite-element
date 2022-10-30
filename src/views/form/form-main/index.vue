@@ -2,18 +2,42 @@
 import draggable from "vuedraggable";
 import type { FormInfo, FormItem } from "@/views/form/index";
 import formItemVue from "./formItem.vue";
-import { View, Upload, Download, Tickets } from "@element-plus/icons-vue";
+import { View, Upload, Download, Tickets, Delete } from "@element-plus/icons-vue";
 import { inject, onMounted, reactive, ref, watch, type Ref } from "vue";
 import operateButtonVue from "./components/operateButton.vue";
 import dragIconVue from "./components/dragIcon.vue";
 import previewFormVue from "../form-preview/index.vue"
+import { ElMessage } from "element-plus";
 /**表单信息 */
 const formInfo: FormInfo = inject<FormInfo>("formInfo") as FormInfo;
-console.log(formInfo)
 /**当前选中的元素 */
 const selectFormItem: FormItem = inject<FormItem>("selectFormItem") as FormItem;
+/**保存表单 */
 function saveForm() {
-  console.log(formInfo, JSON.stringify(formInfo))
+  localStorage.setItem('layout', JSON.stringify(formInfo))
+  ElMessage.success('保单保存成功')
+}
+/**清空表单确认 */
+const isClearForm: Ref<boolean> = ref(false)
+/**清空表单 */
+function clearForm() {
+  localStorage.removeItem('layout')
+  Object.assign(formInfo, {
+    id: 0,
+    config: {
+      name: "",
+      labelPosition: "left",
+      size: "default",
+      labelWidth: 90,
+      dbName: {
+        name: "",
+        dbId: 0,
+      },
+    },
+    list: new Array<FormItem>,
+  })
+  isClearForm.value = false
+  ElMessage.success('表单清空成功')
 }
 /**是否可拖动 */
 const isDraggable: Ref<boolean> = inject("isDraggable") as Ref<boolean>;
@@ -49,10 +73,21 @@ const showPreviewForm: Ref<boolean> = ref(false)
 
 <template>
   <el-container class="form-main">
-    <el-header style="height:40px;border-left: 1px var(--el-border-color) var(--el-border-style);border-right:1px var(--el-border-color) var(--el-border-style) ;">
+    <el-header
+      style="height:40px;border-left: 1px var(--el-border-color) var(--el-border-style);border-right:1px var(--el-border-color) var(--el-border-style) ;">
       <el-space class="form-main-operate">
         <el-button size="small" link type="primary" :icon="Tickets" @click="saveForm">保存</el-button>
         <el-button size="small" link type="primary" :icon="View" @click="showPreviewForm = true">预览</el-button>
+        <el-popover :visible="isClearForm" placement="top" :width="160">
+          <p style="color:red">确定清空表单吗?</p>
+          <div style="text-align: right; margin: 0">
+            <el-button size="small" text @click="isClearForm = false">取消</el-button>
+            <el-button size="small" text type="danger" @click="clearForm">确定</el-button>
+          </div>
+          <template #reference>
+            <el-button size="small" link type="primary" :icon="Delete" @click="isClearForm = true">清空</el-button>
+          </template>
+        </el-popover>
         <el-button size="small" link type="primary" :icon="Download">导出JSON</el-button>
         <el-button size="small" link type="primary" :icon="Upload">导入JSON</el-button>
       </el-space>

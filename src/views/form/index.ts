@@ -41,10 +41,9 @@ interface FormItem {
 interface TextFormItem extends FormItem {
   props: {
     height: string,
-    width: string,
-    position: string,
-    textColor: string,
-    fontSize: string,
+    justify: string,
+    color: string,
+    fontSize: number,
   }
 }
 /**输入框配置 */

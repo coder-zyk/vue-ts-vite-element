@@ -8,23 +8,17 @@ const configInfo: TextFormItem = inject<TextFormItem>("selectFormItem") as TextF
       <el-input v-model="configInfo.label" />
     </el-form-item>
     <el-form-item label="文本位置">
-      <el-radio-group v-model="configInfo.props.position">
-        <el-radio-button label="left" />
+      <el-radio-group v-model="configInfo.props.justify">
+        <el-radio-button label="start" />
         <el-radio-button label="center" />
-        <el-radio-button label="right" />
+        <el-radio-button label="end" />
       </el-radio-group>
     </el-form-item>
     <el-form-item label="文字大小">
-      <el-input v-model="configInfo.props.fontSize" />
+      <el-input-number v-model="configInfo.props.fontSize" :min="1" :max="100"/>
     </el-form-item>
     <el-form-item label="文字颜色">
-      <el-color-picker v-model="configInfo.props.textColor" />
-    </el-form-item>
-    <el-form-item label="高度">
-      <el-input v-model="configInfo.props.height" />
-    </el-form-item>
-    <el-form-item label="宽度">
-      <el-input v-model="configInfo.props.width" />
+      <el-color-picker v-model="configInfo.props.color" />
     </el-form-item>
     <el-form-item label="默认值">
       <el-input v-model="configInfo.value" />

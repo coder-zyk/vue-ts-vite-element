@@ -6,6 +6,7 @@ import formConfig from "./form-config/index.vue";
 import { reactive, ref, watch, provide, type Ref } from "vue";
 import './style/common.scss'
 
+
 /**表单信息 */
 const formInfo: FormInfo = reactive({
   id: 0,
@@ -21,6 +22,8 @@ const formInfo: FormInfo = reactive({
   },
   list: new Array<FormItem>,
 });
+Object.assign(formInfo, JSON.parse(localStorage.getItem('layout') as string))
+
 /**选中的Item */
 const selectFormItem: FormItem = reactive({
   label: "",
