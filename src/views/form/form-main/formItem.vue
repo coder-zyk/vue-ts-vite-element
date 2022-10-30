@@ -142,7 +142,7 @@ function clickHandle(selectElement: FormItem) {
     bottom: 0;
     right: 0;
     position: absolute;
-    z-index: 1890;
+    z-index: 1000;
   }
 
 }

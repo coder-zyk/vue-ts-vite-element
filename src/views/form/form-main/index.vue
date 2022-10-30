@@ -6,7 +6,7 @@ import { View, Upload, Download, Tickets } from "@element-plus/icons-vue";
 import { inject, onMounted, reactive, ref, watch, type Ref } from "vue";
 import operateButtonVue from "./components/operateButton.vue";
 import dragIconVue from "./components/dragIcon.vue";
-import previewFormVue from "./components/preview-form/index.vue"
+import previewFormVue from "../form-preview/index.vue"
 /**表单信息 */
 const formInfo: FormInfo = inject<FormInfo>("formInfo") as FormInfo;
 console.log(formInfo)
@@ -48,64 +48,68 @@ const showPreviewForm: Ref<boolean> = ref(false)
 </script>
 
 <template>
-  <div class="form-main">
-    <el-space class="form-main-operate">
-      <el-button size="small" link type="primary" :icon="Tickets" @click="saveForm">保存</el-button>
-      <el-button size="small" link type="primary" :icon="View" @click="showPreviewForm = true">预览</el-button>
-      <el-button size="small" link type="primary" :icon="Download">导出JSON</el-button>
-      <el-button size="small" link type="primary" :icon="Upload">导入JSON</el-button>
-    </el-space>
-    <el-form style="height: calc(100% - 40px);" :label-position="formInfo.config.labelPosition"
-      :size="formInfo.config.size" :label-width="formInfo.config.labelWidth" id="formRef">
-      <el-scrollbar>
-        <draggable :list="formInfo.list" group="people" item-key="id" :force-fallback="true"
-          ghost-class="form-main-ghost" drag-class="form-main-drag" :disabled="!isDraggable" @change="change"
-          :fallback-class="true" @end="isDraggable = false" :style="`min-height:${formHeight}px;width:100%`">
-          <template #item="{ element }">
-            <form-item-vue :formItem="element" :formItemList="formInfo.list" v-if="element.type != 'row'">
-            </form-item-vue>
-            <el-row v-else :gutter="element.props.gutter" :justify="element.props.justify" :align="element.props.align"
-              :class="`form-main-row ${selectFormItem.id == element.id ? 'form-main-row-active' : ''}`"
-              @click.stop="clickHandel(element)">
-              <dragIconVue :form-item="element" v-if="element.id == selectFormItem.id"></dragIconVue>
-              <operateButtonVue :form-item="element" :form-item-list="formInfo.list"
-                v-if="element.id == selectFormItem.id"></operateButtonVue>
-              <el-col v-for="(item, index) in element.props.children" :span="item.props.span"
-                :offset="item.props.offset" :pull="item.props.pull" :push="item.props.push"
-                @click.stop="clickHandel(item)">
-                <div style="position:relative">
-                  <operateButtonVue :form-item="item" :form-item-list="element.props.children"
-                    v-if="item.id == selectFormItem.id"></operateButtonVue>
-                  <draggable :list="item.props.children" :group="groupRow" item-key="id" :force-fallback="true"
-                    ghost-class="form-main-ghost" drag-class="form-main-drag" :disabled="!isDraggable"
-                    :fallback-class="true" @end="isDraggable = false" @change="change"
-                    :class="`form-main-col ${selectFormItem.id == item.id ? 'form-main-col-active' : ''}`">
-                    <template #item="{ element }">
-                      <form-item-vue :formItem="element" :formItemList="item.props.children"></form-item-vue>
-                    </template>
-                  </draggable>
-                </div>
-              </el-col>
-            </el-row>
-          </template>
-        </draggable>
-      </el-scrollbar>
-    </el-form>
+  <el-container class="form-main">
+    <el-header style="height:40px;border-left: 1px var(--el-border-color) var(--el-border-style);border-right: 1px var(--el-border-color) var(--el-border-style);">
+      <el-space class="form-main-operate">
+        <el-button size="small" link type="primary" :icon="Tickets" @click="saveForm">保存</el-button>
+        <el-button size="small" link type="primary" :icon="View" @click="showPreviewForm = true">预览</el-button>
+        <el-button size="small" link type="primary" :icon="Download">导出JSON</el-button>
+        <el-button size="small" link type="primary" :icon="Upload">导入JSON</el-button>
+      </el-space>
+    </el-header>
+    <el-main style=" background-color: #f1f1f1">
+      <el-form style="height: 100%;background-color: white" :size="formInfo.config.size"
+        :label-width="formInfo.config.labelWidth" id="formRef">
+        <el-scrollbar>
+          <draggable :list="formInfo.list" group="people" item-key="id" :force-fallback="true"
+            ghost-class="form-main-ghost" drag-class="form-main-drag" :disabled="!isDraggable" @change="change"
+            :fallback-class="true" @end="isDraggable = false" :style="`min-height:${formHeight}px;width:100%`">
+            <template #item="{ element }">
+              <form-item-vue :formItem="element" :formItemList="formInfo.list" v-if="element.type != 'row'">
+              </form-item-vue>
+              <el-row v-else :gutter="element.props.gutter" :justify="element.props.justify"
+                :align="element.props.align"
+                :class="`form-main-row ${selectFormItem.id == element.id ? 'form-main-row-active' : ''}`"
+                @click.stop="clickHandel(element)">
+                <dragIconVue :form-item="element" v-if="element.id == selectFormItem.id"></dragIconVue>
+                <operateButtonVue :form-item="element" :form-item-list="formInfo.list"
+                  v-if="element.id == selectFormItem.id"></operateButtonVue>
+                <el-col v-for="(item, index) in element.props.children" :span="item.props.span"
+                  :offset="item.props.offset" :pull="item.props.pull" :push="item.props.push"
+                  @click.stop="clickHandel(item)">
+                  <div style="position:relative">
+                    <operateButtonVue :form-item="item" :form-item-list="element.props.children"
+                      v-if="item.id == selectFormItem.id"></operateButtonVue>
+                    <draggable :list="item.props.children" :group="groupRow" item-key="id" :force-fallback="true"
+                      ghost-class="form-main-ghost" drag-class="form-main-drag" :disabled="!isDraggable"
+                      :fallback-class="true" @end="isDraggable = false" @change="change"
+                      :class="`form-main-col ${selectFormItem.id == item.id ? 'form-main-col-active' : ''}`">
+                      <template #item="{ element }">
+                        <form-item-vue :formItem="element" :formItemList="item.props.children"></form-item-vue>
+                      </template>
+                    </draggable>
+                  </div>
+                </el-col>
+              </el-row>
+            </template>
+          </draggable>
+        </el-scrollbar>
+      </el-form>
+    </el-main>
     <el-dialog v-model="showPreviewForm" :title="formInfo.config.name" destroy-on-close :close-on-click-modal="false">
       <el-scrollbar max-height="60vh">
         <preview-form-vue :form-info="formInfo"></preview-form-vue>
-        <template #footer>
-          <el-space alignment="end">
-            <el-button @click="showPreviewForm = false">取消</el-button>
-            <el-button type="primary" @click="showPreviewForm = false">
-              确定
-            </el-button>
-          </el-space>
-        </template>
       </el-scrollbar>
-
+      <template #footer>
+        <el-space alignment="end">
+          <el-button @click="showPreviewForm = false">取消</el-button>
+          <el-button type="primary" @click="showPreviewForm = false">
+            确定
+          </el-button>
+        </el-space>
+      </template>
     </el-dialog>
-  </div>
+  </el-container>
 </template>
 
 <style scoped lang="scss">
@@ -137,7 +141,6 @@ const showPreviewForm: Ref<boolean> = ref(false)
 
     .form-main-col-active {
       border: 2px solid #409eff;
-
     }
   }
 
@@ -146,6 +149,7 @@ const showPreviewForm: Ref<boolean> = ref(false)
   }
 
   .form-main-operate {
+    background-color: white;
     display: flex;
     justify-content: flex-end;
     height: 40px;

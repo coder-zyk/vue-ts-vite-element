@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { FormInfo, FormItem } from "@/views/form/index";
-import formLeft from "./form-left/index.vue";
+import formLeft from "./form-compoents/index.vue";
 import formMain from "./form-main/index.vue";
 import formConfig from "./form-config/index.vue";
 import { reactive, ref, watch, provide, type Ref } from "vue";
@@ -46,7 +46,7 @@ provide("dataTables", dataTables);
     <el-aside width="300px">
       <form-left></form-left>
     </el-aside>
-    <el-main style="min-width: 500px;">
+    <el-main style="min-width: 500px;padding: 0px;">
       <form-main></form-main>
     </el-main>
     <el-aside width="300px" style="height:100%">
@@ -58,6 +58,7 @@ provide("dataTables", dataTables);
 <style scoped lang="scss">
 .form-container {
   height: 100%;
+  border-top: 1px var(--el-border-color) var(--el-border-style);
 }
 </style>
   

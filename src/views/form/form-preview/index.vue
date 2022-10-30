@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import type { FormInfo } from '@/views/form';
+import type { FormInfo } from '../index';
 import { inject, reactive } from 'vue';
 import generateFormItemVue from './generateFormItem.vue';
 const formInfo: FormInfo = reactive(JSON.parse(JSON.stringify(inject<FormInfo>("formInfo"))));

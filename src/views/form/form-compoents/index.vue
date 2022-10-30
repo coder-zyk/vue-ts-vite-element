@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { inject, ref, type Ref } from "vue";
 import draggable from "vuedraggable";
-import {
-  formBaseItems,
-  formAdvancedItems,
-  formLayoutItems,
-  type FormItem,
-  type FormInfo,
+import type {
+  FormItem,
+  FormInfo,
 } from "@/views/form/index";
 import { maker } from "@/views/form/util";
+import { baseComponents, advancedComponents, layoutComponents } from './index'
 /**表单信息 */
 const formInfo: FormInfo = inject<FormInfo>("formInfo") as FormInfo;
 /**当前选中的元素 */
@@ -48,36 +46,36 @@ function end() {
     <el-tab-pane label="组件列表" name="components">
       <el-divider content-position="left">基础组件</el-divider>
       <div class="form-left-border">
-        <draggable :list="formBaseItems" :group="{ name: 'people', pull: 'clone', put: false }" item-key="field"
+        <draggable :list="baseComponents" :group="{ name: 'people', pull: 'clone', put: false }" item-key="field"
           :sort="false" :force-fallback="true" ghost-class="form-left-ghost" drag-class="form-left-drag"
           chosenClass="form-left-chosen" @end="end" @start="start" :clone="addFormItem" :fallback-class="true">
           <template #item="{ element }">
             <div class="form-left-label">
-              {{ element.title }}
+              {{ element.label }}
             </div>
           </template>
         </draggable>
       </div>
       <el-divider content-position="left">高级组件</el-divider>
       <div class="form-left-border">
-        <draggable :list="formAdvancedItems" :group="{ name: 'people', pull: 'clone', put: false }" item-key="field"
+        <draggable :list="advancedComponents" :group="{ name: 'people', pull: 'clone', put: false }" item-key="field"
           :sort="false" :force-fallback="true" ghost-class="form-left-ghost" drag-class="form-left-drag"
           chosenClass="form-left-chosen" :clone="addFormItem" @end="end" :fallback-class="true">
           <template #item="{ element }">
             <div class="form-left-label">
-              {{ element.title }}
+              {{ element.label }}
             </div>
           </template>
         </draggable>
       </div>
       <el-divider content-position="left">布局组件</el-divider>
       <div class="form-left-border">
-        <draggable :list="formLayoutItems" :group="{ name: 'people', pull: 'clone', put: false }" item-key="field"
+        <draggable :list="layoutComponents" :group="{ name: 'people', pull: 'clone', put: false }" item-key="field"
           :sort="false" :force-fallback="true" ghost-class="form-left-ghost" drag-class="form-left-drag"
           chosenClass="form-left-chosen" :clone="addFormItem" @end="end" :fallback-class="true">
           <template #item="{ element }">
             <div class="form-left-label">
-              {{ element.title }}
+              {{ element.label }}
             </div>
           </template>
         </draggable>
@@ -94,6 +92,7 @@ function end() {
 <style  lang="scss">
 .form-left {
   .form-left-border {
+
     // border: 1px solid #dcdfe6;
     div {
       margin: 10px;
