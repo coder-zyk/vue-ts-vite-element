@@ -183,12 +183,12 @@ class Maker {
     }
   }
   /**日期选择 */
-  datetime(): DateFormItem {
+  date(): DateFormItem {
     return {
-      type: 'datetime',
-      id: 'datetime',
+      type: 'date',
+      id: 'date',
       label: '日期选择器',
-      field: 'datetime',
+      field: 'date',
       value: '',
       required: false,
       props: {

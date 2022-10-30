@@ -43,10 +43,10 @@ provide("dataTables", dataTables);
   
 <template>
   <el-container class="form-container">
-    <el-aside width="300px">
+    <el-aside width="300px" style="height:100%">
       <form-left></form-left>
     </el-aside>
-    <el-main style="min-width: 500px;padding: 0px;">
+    <el-main style="min-width: 500px;padding: 0px;height:100%">
       <form-main></form-main>
     </el-main>
     <el-aside width="300px" style="height:100%">
@@ -58,6 +58,7 @@ provide("dataTables", dataTables);
 <style scoped lang="scss">
 .form-container {
   height: 100%;
+  min-height: 500px;
   border-top: 1px var(--el-border-color) var(--el-border-style);
 }
 </style>

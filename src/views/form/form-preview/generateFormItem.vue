@@ -59,7 +59,7 @@ const formItem: FormItem = props.formItemInfo
       <el-option v-for="item in formItem.data" :key="item.value" :label="item.label" :value="item.value" />
     </el-select>
     <!-- 日期选择器 -->
-    <el-date-picker v-if="formItem.type === 'datetime'" v-model="formItem.value" :type="formItem.props.type"
+    <el-date-picker v-if="formItem.type === 'date'" v-model="formItem.value" :type="formItem.props.type"
       :format="formItem.props.format" :placeholder="formItem.props.placeholder" :editable="formItem.props.editable"
       :end-placeholder="formItem.props.endPlaceholder" :start-placeholder="formItem.props.startPlaceholder"
       :clearable="formItem.props.clearable" :value-format="formItem.props.valueFormat"

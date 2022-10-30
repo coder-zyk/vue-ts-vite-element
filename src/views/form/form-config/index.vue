@@ -7,7 +7,7 @@ import radioVue from "./components/base-components/radio.vue";
 import inputNumberVue from "./components/base-components/inputNumber.vue";
 import checkboxVue from "./components/base-components/checkbox.vue";
 import selectVue from "./components/base-components/select.vue";
-import dateTimeVue from './components/base-components/dateTime.vue'
+import dateVue from './components/base-components/date.vue'
 import timeVue from "./components/base-components/time.vue";
 import colorPickerVue from "./components/base-components/colorPicker.vue";
 import switchVue from './components/base-components/switch.vue';
@@ -78,7 +78,7 @@ watch(
         <input-number-vue v-if="selectFormItem.type == 'number'" :config-info="selectFormItem"></input-number-vue>
         <checkbox-vue v-if="selectFormItem.type == 'checkbox'" :config-info="selectFormItem"></checkbox-vue>
         <select-vue v-if="selectFormItem.type == 'select'" :config-info="selectFormItem"></select-vue>
-        <date-time-vue v-if="selectFormItem.type == 'datetime'" :config-info="selectFormItem"></date-time-vue>
+        <date-vue v-if="selectFormItem.type == 'date'" :config-info="selectFormItem"></date-vue>
         <time-vue v-if="selectFormItem.type == 'time'" :config-info="selectFormItem"></time-vue>
         <color-picker-vue v-if="selectFormItem.type == 'color'" :config-info="selectFormItem"></color-picker-vue>
         <switch-vue v-if="selectFormItem.type == 'switch'" :config-info="selectFormItem"></switch-vue>

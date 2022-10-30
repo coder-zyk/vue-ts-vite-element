@@ -1,3 +1,155 @@
+@font-face {
+  font-family: icons;
+  src: url(icons.woff) format('woff');
+}
+
+.icon {
+  font-family: icons !important;
+  font-size: 21px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-input {
+  &:before {
+    content: "\e77f";
+  }
+}
+
+.icon-number {
+  &:before {
+    content: "\e783";
+  }
+}
+
+.icon-radio {
+  &:before {
+    content: "\e781";
+  }
+}
+
+.icon-checkbox {
+  &:before {
+    content: "\e780";
+  }
+}
+
+.icon-select {
+  &:before {
+    content: "\e78e";
+  }
+}
+
+.icon-switch {
+  &:before {
+    content: "\e77c";
+  }
+}
+
+.icon-time {
+  &:before {
+    content: "\e794";
+  }
+}
+
+.icon-date {
+  &:before {
+    content: "\e793";
+  }
+}
+
+.icon-slider {
+  &:before {
+    content: "\e791";
+  }
+}
+
+.icon-rate {
+  &:before {
+    content: "\e782";
+  }
+}
+
+.icon-color {
+  &:before {
+    content: "\e787";
+  }
+}
+
+.icon-cascader {
+  &:before {
+    content: "\e785";
+  }
+}
+
+.icon-upload {
+  &:before {
+    content: "\e784";
+  }
+}
+
+.icon-transfer {
+  &:before {
+    content: "\e78f";
+  }
+}
+
+.icon-tree {
+  &:before {
+    content: "\e792";
+  }
+}
+
+.icon-editor {
+  &:before {
+    content: "\e790";
+  }
+}
+
+.icon-alter {
+  &:before {
+    content: "\e78a";
+  }
+}
+
+.icon-button {
+  &:before {
+    content: "\e77e";
+  }
+}
+
+.icon-span {
+  &:before {
+    content: "\e788";
+  }
+}
+
+.icon-divider {
+  &:before {
+    content: "\e78d";
+  }
+}
+
+.icon-row {
+  &:before {
+    content: "\e78b";
+  }
+}
+
+.icon-tab {
+  &:before {
+    content: "\e77b";
+  }
+}
+
+.icon-space {
+  &:before {
+    content: "\e786";
+  }
+}
+
+
 //vue-draggable占位样式
 .form-main-ghost {
   background: #b3d8ff;
