@@ -109,11 +109,12 @@ const layoutComponents = [
     label: '栅格布局',
     icon: ''
   },
+  // {
+  //   type: 'tab',
+  //   label: '标签页',
+  //   icon: ''
+  // }, 
   {
-    type: 'tab',
-    label: '标签页',
-    icon: ''
-  }, {
     type: 'space',
     label: '间距',
     icon: ''

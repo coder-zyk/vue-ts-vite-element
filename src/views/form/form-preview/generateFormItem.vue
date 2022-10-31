@@ -16,12 +16,12 @@ const formItem: FormItem = props.formItemInfo
       {{ formItem.value }}
     </span>
     <!-- 单行输入 -->
-    <el-input :type="formItem.props.type" v-if="formItem.type === 'input'" v-model="formItem.value"
+    <el-input v-if="formItem.type === 'input'" v-model="formItem.value" :type="formItem.props.type"
       :clearable="formItem.props.clearable" :disabled="formItem.props.disabled" :rows="formItem.props.rows"
       :placeholder="formItem.props.placeholder" :resize="formItem.props.resize" :autocomplete="formItem.props.resize"
       :autofocus="formItem.props.autofocus" :show-password="formItem.props.showPassword"
       :minlength="formItem.props.minlength" :maxlength="formItem.props.maxlength"
-      :show-word-limit="formItem.props.showWordLimit" style="width: 100%;"></el-input>
+      :show-word-limit="formItem.props.showWordLimit"></el-input>
     <!-- 数字输入 -->
     <el-input-number v-if="formItem.type === 'number'" v-model="formItem.value"
       :placeholder="formItem.props.placeholder" :controls="formItem.props.controls"

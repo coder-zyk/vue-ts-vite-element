@@ -89,16 +89,11 @@ const showPreviewForm: Ref<boolean> = ref(false)
       <el-space class="form-main-operate">
         <el-button size="small" link type="primary" :icon="Tickets" @click="saveForm">保存</el-button>
         <el-button size="small" link type="primary" :icon="View" @click="showPreviewForm = true">预览</el-button>
-        <el-popover :visible="isClearForm" placement="top" :width="160">
-          <p style="color:red">确定清空表单吗?</p>
-          <div style="text-align: right; margin: 0">
-            <el-button size="small" text @click="isClearForm = false">取消</el-button>
-            <el-button size="small" text type="danger" @click="clearForm">确定</el-button>
-          </div>
+        <el-popconfirm title="清空后将无法恢复,确定要清空吗?" @confirm="clearForm" confirm-button-type="danger" confirm-button-text="清空" width="200px">
           <template #reference>
-            <el-button size="small" link type="primary" :icon="Delete" @click="isClearForm = true">清空</el-button>
+            <el-button size="small" link type="primary" :icon="Delete">清空</el-button>
           </template>
-        </el-popover>
+        </el-popconfirm>
         <el-button size="small" link type="primary" :icon="Download">导出JSON</el-button>
         <el-button size="small" link type="primary" :icon="Upload">导入JSON</el-button>
       </el-space>
