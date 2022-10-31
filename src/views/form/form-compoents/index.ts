@@ -1,6 +1,11 @@
 /**表单组件 */
 const formComponents = [
   {
+    type: 'text',
+    label: '文字',
+    icon: ''
+  },
+  {
     type: 'input',
     label: '输入框',
     icon: ''
@@ -91,10 +96,6 @@ const assistComponents = [
   }, {
     type: 'button',
     label: '按钮',
-    icon: ''
-  }, {
-    type: 'text',
-    label: '文字',
     icon: ''
   }, {
     type: 'divider',
