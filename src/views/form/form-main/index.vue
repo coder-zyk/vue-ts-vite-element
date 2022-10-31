@@ -83,6 +83,9 @@ const showPreviewForm: Ref<boolean> = ref(false)
 /**导出json */
 function download() {
   if (formInfo.config.name !== '') {
+    if (formInfo.id == 0) {
+      formInfo.id = new Date().getTime() + (Math.random() * 100000).toFixed(0)
+    }
     let blob = new Blob([JSON.stringify(formInfo)])
     let fileReader = new FileReader()
     fileReader.readAsDataURL(blob)
