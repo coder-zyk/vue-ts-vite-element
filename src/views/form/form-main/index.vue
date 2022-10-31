@@ -82,16 +82,21 @@ function clickHandel(element: FormItem) {
 const showPreviewForm: Ref<boolean> = ref(false)
 /**导出json */
 function download() {
-  let blob = new Blob([JSON.stringify(formInfo)])
-  let fileReader = new FileReader()
-  fileReader.readAsDataURL(blob)
-  fileReader.onload = () => {
-    let a = document.createElement('a')
-    a.href = fileReader.result as string
-    a.download = formInfo.config.name + '.json'
-    a.click()
-    a.remove()
+  if (formInfo.config.name !== '') {
+    let blob = new Blob([JSON.stringify(formInfo)])
+    let fileReader = new FileReader()
+    fileReader.readAsDataURL(blob)
+    fileReader.onload = () => {
+      let a = document.createElement('a')
+      a.href = fileReader.result as string
+      a.download = formInfo.config.name + '.json'
+      a.click()
+      a.remove()
+    }
+  } else {
+    ElMessage.error('请输入表单名称')
   }
+
 }/**导入json */
 function upload(file: UploadFile) {
   let fileReader = new FileReader()
