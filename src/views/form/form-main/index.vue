@@ -7,7 +7,7 @@ import { inject, onMounted, reactive, ref, watch, type Ref } from "vue";
 import operateButtonVue from "./components/operateButton.vue";
 import dragIconVue from "./components/dragIcon.vue";
 import previewFormVue from "../form-preview/index.vue"
-import { ElMessage } from "element-plus";
+import { ElMessage, type UploadFile, type UploadRawFile } from "element-plus";
 /**表单信息 */
 const formInfo: FormInfo = inject<FormInfo>("formInfo") as FormInfo;
 /**当前选中的元素 */
@@ -80,6 +80,26 @@ function clickHandel(element: FormItem) {
 }
 /**展示预览表单弹窗 */
 const showPreviewForm: Ref<boolean> = ref(false)
+/**导出json */
+function download() {
+  let blob = new Blob([JSON.stringify(formInfo)])
+  let fileReader = new FileReader()
+  fileReader.readAsDataURL(blob)
+  fileReader.onload = () => {
+    let a = document.createElement('a')
+    a.href = fileReader.result as string
+    a.download = formInfo.config.name + '.json'
+    a.click()
+    a.remove()
+  }
+}/**导入json */
+function upload(file: UploadFile) {
+  let fileReader = new FileReader()
+  fileReader.readAsText(file.raw as Blob)
+  fileReader.onload = () => {
+    Object.assign(formInfo, JSON.parse(fileReader.result as string))
+  }
+}
 </script>
 
 <template>
@@ -89,13 +109,18 @@ const showPreviewForm: Ref<boolean> = ref(false)
       <el-space class="form-main-operate">
         <el-button size="small" link type="primary" :icon="Tickets" @click="saveForm">保存</el-button>
         <el-button size="small" link type="primary" :icon="View" @click="showPreviewForm = true">预览</el-button>
-        <el-popconfirm title="清空后将无法恢复,确定要清空吗?" @confirm="clearForm" confirm-button-type="danger" confirm-button-text="清空" width="200px">
+        <el-popconfirm title="清空后将无法恢复,确定要清空吗?" @confirm="clearForm" confirm-button-type="danger"
+          confirm-button-text="清空" width="200px">
           <template #reference>
             <el-button size="small" link type="primary" :icon="Delete">清空</el-button>
           </template>
         </el-popconfirm>
-        <el-button size="small" link type="primary" :icon="Download">导出JSON</el-button>
-        <el-button size="small" link type="primary" :icon="Upload">导入JSON</el-button>
+        <el-button size="small" link type="primary" :icon="Download" @click="download">导出JSON</el-button>
+        <el-upload action="" @change="upload" :show-file-list="false" :auto-upload="false" accept=".json">
+          <template #trigger>
+            <el-button size="small" link type="primary" :icon="Upload">导入JSON</el-button>
+          </template>
+        </el-upload>
       </el-space>
     </el-header>
     <el-main style=" background-color: #f1f1f1">
