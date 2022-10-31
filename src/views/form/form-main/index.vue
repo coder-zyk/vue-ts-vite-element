@@ -50,13 +50,11 @@ function clearForm() {
   isClearForm.value = false
   ElMessage.success('表单清空成功')
 }
-/**是否可拖动 */
-const isDraggable: Ref<boolean> = inject("isDraggable") as Ref<boolean>;
+
 /**添加或移动formItm */
 function change(event: any) {
   if (event.added) {
     Object.assign(selectFormItem, event.added.element);
-    isDraggable.value = false;
   }
 }
 /**表单高度 */
@@ -108,6 +106,11 @@ function upload(file: UploadFile) {
     Object.assign(formInfo, JSON.parse(fileReader.result as string))
   }
 }
+/**是否更换draggable样式 */
+const isChangeClass: Ref<boolean> = ref(false)
+function test(event:any,event2:any,event3:any,event4:any) {
+  console.log(event,event2,event3,event4)
+}
 </script>
 
 <template>
@@ -135,15 +138,15 @@ function upload(file: UploadFile) {
       <el-form style="height: 100%;background-color: white" :size="formInfo.config.size"
         :label-width="formInfo.config.labelWidth" id="formRef">
         <el-scrollbar>
-          <draggable :list="formInfo.list" group="people" item-key="id" :force-fallback="true"
-            ghost-class="form-main-ghost" drag-class="form-main-drag" :disabled="!isDraggable" @change="change"
-            :fallback-class="true" @end="isDraggable = false" :style="`min-height:${formHeight}px;width:100%`">
-            <template #item="{ element }">
+          <draggable :list="formInfo.list" group="people" item-key="id" handle=".draggable-icon" @change="change"
+            ghost-class="form-main-ghost"
+            :style="`min-height:${formHeight}px;width:100%`" :force-fallback="true" :fallback-class="true">
+            <template #item="{ element }" @start="isChangeClass = true" @end="isChangeClass = false">
               <form-item-vue :formItem="element" :formItemList="formInfo.list" v-if="element.type != 'row'">
               </form-item-vue>
               <el-row v-else :gutter="element.props.gutter" :justify="element.props.justify"
                 :align="element.props.align"
-                :class="`form-main-row ${selectFormItem.id == element.id ? 'form-main-row-active' : ''}`"
+                :class="`form-main-item ${selectFormItem.id == element.id ? 'form-main-item-active' : ''}`"
                 @click.stop="clickHandel(element)">
                 <dragIconVue :form-item="element" v-if="element.id == selectFormItem.id"></dragIconVue>
                 <operateButtonVue :form-item="element" :form-item-list="formInfo.list"
@@ -154,11 +157,10 @@ function upload(file: UploadFile) {
                   <div style="position:relative">
                     <operateButtonVue :form-item="item" :form-item-list="element.props.children"
                       v-if="item.id == selectFormItem.id"></operateButtonVue>
-                    <draggable :list="item.props.children" :group="groupRow" item-key="id" :force-fallback="true"
-                      ghost-class="form-main-ghost" drag-class="form-main-drag" :disabled="!isDraggable"
-                      :fallback-class="true" @end="isDraggable = false" @change="change"
-                      :class="`form-main-col ${selectFormItem.id == item.id ? 'form-main-col-active' : ''}`">
-                      <template #item="{ element }">
+                    <draggable :list="item.props.children" :group="groupRow" item-key="id" ghost-class="form-main-ghost"
+                      handle=".draggable-icon" @change="change"
+                      :class="`form-main-item ${selectFormItem.id == item.id ? 'form-main-item-active' : ''}`">
+                      <template #item="{ element }" :fallback-class="true" :force-fallback="true">
                         <form-item-vue :formItem="element" :formItemList="item.props.children"></form-item-vue>
                       </template>
                     </draggable>
@@ -194,32 +196,6 @@ function upload(file: UploadFile) {
   :deep(.el-row) {
     margin-left: 0px !important;
     margin-right: 0px !important;
-  }
-
-  .form-main-row {
-    min-height: 60px;
-    user-select: none;
-    word-break: break-all;
-    border: 1px dashed #409eff;
-    margin-bottom: 2px;
-    padding: 5px;
-
-    .form-main-col {
-      min-height: 60px;
-      user-select: none;
-      word-break: break-all;
-      border: 1px dashed #409eff;
-      margin-bottom: 2px;
-      padding: 5px;
-    }
-
-    .form-main-col-active {
-      border: 2px solid #409eff;
-    }
-  }
-
-  .form-main-row-active {
-    border: 2px solid #409eff;
   }
 
   .form-main-operate {

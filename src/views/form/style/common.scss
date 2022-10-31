@@ -149,15 +149,26 @@
   }
 }
 
+.form-main-item {
+  position: relative;
+  min-height: 40px;
+  user-select: none;
+  word-break: break-all;
+  border: 1px dashed #409eff;
+  align-items: center;
+  margin-bottom: 2px;
+  padding: 5px;
 
-//vue-draggable占位样式
-.form-main-ghost {
-  height: 5px;
-  background: #75b5f9;
-  color: #ffffff00;
+  .form-main-item-mask {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: 1000;
+  }
 }
 
-.form-main-drag {
-  border-left: 1px solid #409eff;
-  background: #75b5f9;
+.form-main-item-active {
+  border: 2px solid #409eff;
 }

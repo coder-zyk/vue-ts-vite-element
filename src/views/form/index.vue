@@ -35,9 +35,6 @@ const selectFormItem: FormItem = reactive({
 });
 /**表单数据字段表 */
 const dataTables: Ref<any> = ref([]);
-/**是否可拖动 */
-const isDraggable = ref(false);
-provide("isDraggable", isDraggable);
 provide("selectFormItem", selectFormItem);
 provide("formInfo", formInfo);
 provide("dataTables", dataTables);

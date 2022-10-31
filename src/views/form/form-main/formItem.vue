@@ -128,28 +128,5 @@ function clickHandle(selectElement: FormItem) {
 </template>
 
 <style scoped lang="scss">
-.form-main-item {
-  position: relative;
-  min-height: 20px;
-  user-select: none;
-  word-break: break-all;
-  border: 1px dashed #409eff;
-  align-items: center;
-  margin-bottom: 2px;
-  padding: 5px;
 
-  .form-main-item-mask {
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: 1000;
-  }
-
-}
-
-.form-main-item-active {
-  border: 2px solid #409eff;
-}
 </style>
