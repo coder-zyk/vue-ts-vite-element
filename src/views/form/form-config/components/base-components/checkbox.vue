@@ -63,7 +63,7 @@ const configInfo: CheckboxFormItem = inject<CheckboxFormItem>("selectFormItem") 
       <el-switch v-model="configInfo.props.isButton" inline-prompt active-text="是" inactive-text="否" />
     </el-form-item>
     <el-form-item label="可被勾选的 checkbox 的最小数量">
-      <el-input-number v-model="configInfo.props.min" :min="1" :max="999" />
+      <el-input-number v-model="configInfo.props.min" :min="0" :max="999" />
     </el-form-item>
     <el-form-item label="可被勾选的 checkbox 的最大数量">
       <el-input-number v-model="configInfo.props.max" :min="1" :max="999" />
