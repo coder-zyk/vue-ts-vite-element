@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/views/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,6 +11,9 @@ const router = createRouter({
         {
           name: 'form',
           path: '/form',
+          meta: {
+            title: 'form-design'
+          },
           component: () => import('@/views/form/index.vue')
         }
       ],
@@ -19,9 +21,16 @@ const router = createRouter({
     {
       path: '/flow',
       name: 'flow',
+      meta: {
+        title: 'flow-design'
+      },
       component: () => import('@/views/flow/index.vue')
     },
   ]
 })
-
+router.beforeEach((to, from) => {
+  if (to.meta.title) {
+    document.title = to.meta.title as string
+  }
+})
 export default router
