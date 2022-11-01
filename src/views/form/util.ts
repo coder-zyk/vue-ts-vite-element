@@ -1,4 +1,4 @@
-import type { TextFormItem, InputFormItem, RadioFormItem, InputNumberFormItem, CheckboxFormItem, SelectFormItem, DateFormItem, TimeFormItem, ColorPickerFormItem, SwitchFormItem, RateFormItem, SliderFormItem, RowFormItem, ColFormItem, SpaceFormItem } from "."
+import type { TextFormItem, InputFormItem, RadioFormItem, InputNumberFormItem, CheckboxFormItem, SelectFormItem, DateFormItem, TimeFormItem, ColorPickerFormItem, SwitchFormItem, RateFormItem, SliderFormItem, RowFormItem, ColFormItem, SpaceFormItem, DividerFormItem } from "."
 
 class Maker {
   /**索引签名
@@ -356,6 +356,20 @@ class Maker {
       required: false,
       props: {
         height: 10
+      },
+    }
+  }
+  divider(): DividerFormItem {
+    return {
+      type: 'divider',
+      id: 'divider',
+      label: '',
+      field: 'divider',
+      value: '',
+      required: false,
+      props: {
+        direction: 'horizontal',
+        contentPosition: 'center',
       },
     }
   }

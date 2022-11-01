@@ -32,8 +32,10 @@ function clickHandle(selectElement: FormItem) {
     <operateButtonVue :form-item="formItem" :form-item-list="props.formItemList"
       v-if="formItem.id == selectFormItem.id">
     </operateButtonVue>
-    <div v-if="['space'].includes(formItem.type)">
-      <div :style="`height:${formItem.props.height}px;width:100%`"></div>
+    <div v-if="['space', 'divider'].includes(formItem.type)">
+      <div :style="`height:${formItem.props.height}px;width:100%`" v-if="formItem.type === 'space'"></div>
+      <el-divider v-if="formItem.type === 'divider'" :content-position="formItem.props.contentPosition"
+        :direction="formItem.props.direction">{{ formItem.value }}</el-divider>
     </div>
     <el-form-item :label="formItem.label" :label-width="formItem.label === '' ? '0px' : ''"
       :required="formItem.required" :style="`margin-bottom:${formItem.type == 'text' ? '0px' : undefined}`" v-else>

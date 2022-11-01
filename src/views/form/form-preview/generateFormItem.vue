@@ -5,8 +5,10 @@ const props = defineProps(['formItemInfo'])
 const formItem: FormItem = props.formItemInfo
 </script>
 <template>
-  <div v-if="['space'].includes(formItem.type)">
+  <div v-if="['space','divider'].includes(formItem.type)">
     <div :style="`height:${formItem.props.height}px;width:100%`"></div>
+    <el-divider v-if="formItem.type === 'divider'" :content-position="formItem.props.contentPosition"
+        :direction="formItem.props.direction">{{ formItem.value }}</el-divider>
   </div>
   <el-form-item :label="formItem.label" :label-width="formItem.label === '' ? '0px' : ''" :required="formItem.required"
     :style="`margin-bottom:${formItem.type == 'text' ? '0px' : undefined}`" v-else>

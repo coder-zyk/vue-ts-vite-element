@@ -1,6 +1,6 @@
 /**表单信息 */
 interface FormInfo {
-  id: number|string,
+  id: number | string,
   config: FormConfig,
   list: Array<FormItem>
 }
@@ -221,7 +221,14 @@ interface ColFormItem extends FormItem {
 /**间隔配置 */
 interface SpaceFormItem extends FormItem {
   props: {
-   height:number
+    height: number
+  }
+}
+/**分割线配置 */
+interface DividerFormItem extends FormItem {
+  props: {
+    direction: 'horizontal' | 'vertical',
+    contentPosition: 'left' | 'center' | 'right'
   }
 }
 export type {
@@ -242,5 +249,6 @@ export type {
   ColFormItem,
   FormInfo,
   FormConfig,
-  SpaceFormItem
+  SpaceFormItem,
+  DividerFormItem
 }

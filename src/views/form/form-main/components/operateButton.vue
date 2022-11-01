@@ -76,4 +76,7 @@ function addCol() {
   right: 0;
   z-index: 1900;
 }
+.el-button+.el-button{
+  margin-left: 6px;
+}
 </style>
