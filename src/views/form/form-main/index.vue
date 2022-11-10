@@ -50,28 +50,26 @@ function clearForm() {
   isClearForm.value = false
   ElMessage.success('表单清空成功')
 }
-
 /**添加或移动formItm */
-function change(event: any) {
+function change(event: any, row?: Array<any>) {
   if (event.added) {
     Object.assign(selectFormItem, event.added.element);
   }
 }
+const groupRow = reactive({
+  name: 'people',
+  put: (to: any, from: any, element: HTMLElement, event: any) => {
+    if (element.innerText == '栅格布局' || /el-row/.test(element.className))
+      return false
+    return true
+  }
+})
 /**表单高度 */
 const formHeight: Ref<number> = ref(0)
 onMounted(() => {
   /**获取表单高度 */
   formHeight.value = document.getElementById('formRef')?.offsetHeight as number
 })
-const groupRow = reactive({
-  name: 'people',
-  put: (to: any, from: any, element: HTMLElement, event: any) => {
-    if (element.innerText == '栅格布局')
-      return false
-    return true
-  }
-})
-
 /**点击事件 */
 function clickHandel(element: FormItem) {
   Object.assign(selectFormItem, element)
@@ -106,11 +104,6 @@ function upload(file: UploadFile) {
     Object.assign(formInfo, JSON.parse(fileReader.result as string))
   }
 }
-/**是否更换draggable样式 */
-const isChangeClass: Ref<boolean> = ref(false)
-function test(event:any,event2:any,event3:any,event4:any) {
-  console.log(event,event2,event3,event4)
-}
 </script>
 
 <template>
@@ -139,9 +132,9 @@ function test(event:any,event2:any,event3:any,event4:any) {
         :label-width="formInfo.config.labelWidth" id="formRef">
         <el-scrollbar>
           <draggable :list="formInfo.list" group="people" item-key="id" handle=".draggable-icon" @change="change"
-            ghost-class="form-main-ghost"
-            :style="`min-height:${formHeight}px;width:100%`" :force-fallback="true" :fallback-class="true">
-            <template #item="{ element }" @start="isChangeClass = true" @end="isChangeClass = false">
+            ghost-class="form-main-ghost" :style="`min-height:${formHeight}px;width:100%`" :force-fallback="true"
+            :fallback-class="true">
+            <template #item="{ element }">
               <form-item-vue :formItem="element" :formItemList="formInfo.list" v-if="element.type != 'row'">
               </form-item-vue>
               <el-row v-else :gutter="element.props.gutter" :justify="element.props.justify"
@@ -158,9 +151,10 @@ function test(event:any,event2:any,event3:any,event4:any) {
                     <operateButtonVue :form-item="item" :form-item-list="element.props.children"
                       v-if="item.id == selectFormItem.id"></operateButtonVue>
                     <draggable :list="item.props.children" :group="groupRow" item-key="id" ghost-class="form-main-ghost"
-                      handle=".draggable-icon" @change="change"
-                      :class="`form-main-item ${selectFormItem.id == item.id ? 'form-main-item-active' : ''}`">
-                      <template #item="{ element }" :fallback-class="true" :force-fallback="true">
+                      handle=".draggable-icon" @change="change($event, item.props.children)"
+                      :class="`form-main-item ${selectFormItem.id == item.id ? 'form-main-item-active' : ''}`"
+                      :fallback-class="true" :force-fallback="true">
+                      <template #item="{ element }">
                         <form-item-vue :formItem="element" :formItemList="item.props.children"></form-item-vue>
                       </template>
                     </draggable>
