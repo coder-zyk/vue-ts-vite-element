@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { inject, watch, type Ref } from "vue";
+import { Warning } from '@element-plus/icons-vue'
 import type { FormItem } from "@/views/form/index";
 import operateButtonVue from "./components/operateButton.vue";
 import dragIconVue from "./components/dragIcon.vue";
@@ -37,8 +38,19 @@ function clickHandle(selectElement: FormItem) {
       <el-divider v-if="formItem.type === 'divider'" :content-position="formItem.props.contentPosition"
         :direction="formItem.props.direction">{{ formItem.value }}</el-divider>
     </div>
-    <el-form-item :label="formItem.label" :label-width="formItem.label === '' ? '0px' : ''"
-      :required="formItem.required" :style="`margin-bottom:${formItem.type == 'text' ? '0px' : undefined}`" v-else>
+    <el-form-item :label-width="formItem.label === '' ? '0px' : ''" :required="formItem.required"
+      :style="`margin-bottom:${formItem.type == 'text' ? '0px' : undefined}`" v-else>
+      <template #label>
+        <div style="display: flex;align-items: center">
+          <el-tooltip effect="dark" :content="formItem.toolTip" placement="top"
+            v-if="formItem.toolTip && formItem.toolTip != ''">
+            <el-icon>
+              <Warning />
+            </el-icon>
+          </el-tooltip>
+          {{ formItem.label }}
+        </div>
+      </template>
       <!-- 文本 -->
       <span v-if="formItem.type === 'text'"
         :style="`display:grid;width:100%;line-height:${formItem.props.fontSize + 15}px;justify-content:${formItem.props.justify};color:${formItem.props.color};font-size:${formItem.props.fontSize}px`">

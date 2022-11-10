@@ -1,7 +1,12 @@
 /**表单信息 */
 interface FormInfo {
+  /**表单的id */
   id: number | string,
+  /**表单配置 */
   config: FormConfig,
+  /**表单对应的数据类 */
+  model: { [key: string]: any },
+  /**表单的所有组件 */
   list: Array<FormItem>
 }
 /**表单配置 */
@@ -28,6 +33,8 @@ interface FormItem {
   field: string,
   /**是否必填 */
   required: boolean,
+  /**提示 */
+  toolTip?:string,
   /**组件的值 */
   value: any
   /**组件验证规则 */

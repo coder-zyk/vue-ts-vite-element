@@ -21,6 +21,7 @@ const formInfo: FormInfo = reactive({
       dbId: 0,
     },
   },
+  model:{},
   list: new Array<FormItem>,
 });
 /**选中的Item */

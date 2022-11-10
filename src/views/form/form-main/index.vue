@@ -7,11 +7,11 @@ import { inject, onMounted, reactive, ref, watch, type Ref } from "vue";
 import operateButtonVue from "./components/operateButton.vue";
 import dragIconVue from "./components/dragIcon.vue";
 import previewFormVue from "../form-preview/index.vue"
-import { ElMessage, type UploadFile, type UploadRawFile } from "element-plus";
+import { ElAlert, ElMessage, ElMessageBox, type UploadFile, type UploadRawFile } from "element-plus";
 /**表单信息 */
-const formInfo: FormInfo = inject<FormInfo>("formInfo") as FormInfo;
+const formInfo: FormInfo = inject("formInfo") as FormInfo;
 /**当前选中的元素 */
-const selectFormItem: FormItem = inject<FormItem>("selectFormItem") as FormItem;
+const selectFormItem: FormItem = inject("selectFormItem") as FormItem;
 const formList: Array<FormInfo> = inject("formList") as Array<FormInfo>;
 /**保存表单 */
 function saveForm() {
@@ -45,17 +45,22 @@ function clearForm() {
         dbId: 0,
       },
     },
+    model: {},
     list: new Array<FormItem>,
   })
   isClearForm.value = false
   ElMessage.success('表单清空成功')
 }
-/**添加或移动formItm */
+/**formItm添加*/
 function change(event: any, row?: Array<any>) {
   if (event.added) {
     Object.assign(selectFormItem, event.added.element);
+    if (!formInfo.model[event.added.element.field]) {
+      formInfo.model[event.added.element.field] = selectFormItem.value
+    }
   }
 }
+
 const groupRow = reactive({
   name: 'people',
   put: (to: any, from: any, element: HTMLElement, event: any) => {
@@ -104,6 +109,19 @@ function upload(file: UploadFile) {
     Object.assign(formInfo, JSON.parse(fileReader.result as string))
   }
 }
+const previewRef = ref()
+/**验证表单 */
+function validate() {
+  previewRef.value.validate().then((res: any) => {
+    ElMessage.success('表单验证通过')
+  }).catch((error: any) => {
+  })
+}
+watch(() => selectFormItem.field, (newValue, oldValue) => {
+  let oldKey = Object.keys(formInfo.model).find((key: string) => key == oldValue)
+  delete formInfo.model[oldKey as string]
+  formInfo.model[newValue] = selectFormItem.value
+}, { deep: true })
 </script>
 
 <template>
@@ -129,7 +147,7 @@ function upload(file: UploadFile) {
     </el-header>
     <el-main style=" background-color: #f1f1f1">
       <el-form style="height: 100%;background-color: white" :size="formInfo.config.size"
-        :label-width="formInfo.config.labelWidth" id="formRef">
+        :label-width="formInfo.config.labelWidth" id="formRef" require-asterisk-position="right" :label-position="formInfo.config.labelPosition">
         <el-scrollbar>
           <draggable :list="formInfo.list" group="people" item-key="id" handle=".draggable-icon" @change="change"
             ghost-class="form-main-ghost" :style="`min-height:${formHeight}px;width:100%`" :force-fallback="true"
@@ -168,12 +186,12 @@ function upload(file: UploadFile) {
     </el-main>
     <el-dialog v-model="showPreviewForm" :title="formInfo.config.name" destroy-on-close :close-on-click-modal="false">
       <el-scrollbar max-height="60vh">
-        <preview-form-vue :form-info="formInfo"></preview-form-vue>
+        <preview-form-vue :form-info="formInfo" ref="previewRef"></preview-form-vue>
       </el-scrollbar>
       <template #footer>
         <el-space alignment="end">
           <el-button @click="showPreviewForm = false">取消</el-button>
-          <el-button type="primary" @click="showPreviewForm = false">
+          <el-button type="primary" @click="validate">
             确定
           </el-button>
         </el-space>

@@ -19,6 +19,7 @@ const configInfo: InputNumberFormItem = inject<InputNumberFormItem>("selectFormI
       <el-input v-model="configInfo.value" />
     </el-form-item>
     <el-form-item label="提示信息">
+      <el-input v-model="configInfo.toolTip"></el-input>
     </el-form-item>
     <el-divider content-position="center">属性配置</el-divider>
     <el-form-item label="是否必填">

@@ -15,6 +15,9 @@ function addFormItem(value: FormItem): FormItem {
   temp.id = `${temp.id}_${new Date().getTime()}_${(
     Math.random() * 1000000
   ).toFixed(0)}`;
+  temp.field = `${temp.field}_${(
+    Math.random() * 1000000
+  ).toFixed(0)}`
   return temp;
 }
 
