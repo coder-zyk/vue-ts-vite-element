@@ -32,6 +32,7 @@ const selectFormItem: FormItem = reactive({
   field: "",
   value: '',
   required: false,
+  rules:{},
   props: {},
 });
 /**表单数据字段表 */
