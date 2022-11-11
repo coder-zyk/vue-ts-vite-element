@@ -13,6 +13,7 @@ class Maker {
       label: '文字',
       field: 'text',
       value: '这是一段文字',
+      rules: {},
       required: false,
       props: {
         height: '',
@@ -30,6 +31,7 @@ class Maker {
       label: '单行输入',
       field: 'input',
       value: '',
+      rules: {},
       required: false,
       props: {
         maxlength: 999,
@@ -58,6 +60,7 @@ class Maker {
       label: '数字输入',
       field: 'number',
       value: 1,
+      rules: {},
       required: false,
       props: {
         min: 1,
@@ -82,6 +85,7 @@ class Maker {
       field: 'radio',
       value: '',
       remote: false,
+      rules: {},
       required: false,
       props: {
         label: '',
@@ -109,6 +113,7 @@ class Maker {
       label: '多选框',
       field: 'checkbox',
       value: [],
+      rules: {},
       required: false,
       props: {
         label: '',
@@ -140,6 +145,7 @@ class Maker {
       field: 'select',
       value: [],
       remote: false,
+      rules: {},
       required: false,
       data: [{
         label: '选项1',
@@ -170,6 +176,7 @@ class Maker {
       label: '时间选择器',
       field: 'time',
       value: '',
+      rules: {},
       required: false,
       props: {
         disabled: false,
@@ -191,6 +198,7 @@ class Maker {
       label: '日期选择器',
       field: 'date',
       value: '',
+      rules: {},
       required: false,
       props: {
         disabled: false,
@@ -215,6 +223,7 @@ class Maker {
       label: '评分',
       field: 'rate',
       value: 0,
+      rules: {},
       required: false,
       props: {
         showScore: false,
@@ -233,6 +242,7 @@ class Maker {
       label: '颜色选择器',
       field: 'color',
       value: '',
+      rules: {},
       required: false,
       props: {
         disabled: false,
@@ -248,6 +258,7 @@ class Maker {
       label: '开关',
       field: 'switch',
       value: true,
+      rules: {},
       required: false,
       props: {
         disabled: false,
@@ -266,8 +277,9 @@ class Maker {
       id: 'slider',
       label: '滑块',
       field: 'slider',
-      required: false,
+      rules: {},
       value: 0,
+      required: false,
       props: {
         disabled: false,
         max: 100,
@@ -302,6 +314,7 @@ class Maker {
       label: '',
       field: 'row',
       value: '',
+      rules: {},
       required: false,
       props: {
         gutter: 10,
@@ -316,6 +329,7 @@ class Maker {
             label: '',
             field: 'col',
             value: '',
+            rules: {},
             required: false,
             props: {
               span: 12,
@@ -336,6 +350,7 @@ class Maker {
       label: '',
       field: 'col',
       value: '',
+      rules: {},
       required: false,
       props: {
         pull: 0,
@@ -353,6 +368,7 @@ class Maker {
       label: '',
       field: 'space',
       value: '',
+      rules: {},
       required: false,
       props: {
         height: 10
@@ -366,6 +382,7 @@ class Maker {
       label: '',
       field: 'divider',
       value: '',
+      rules: {},
       required: false,
       props: {
         direction: 'horizontal',

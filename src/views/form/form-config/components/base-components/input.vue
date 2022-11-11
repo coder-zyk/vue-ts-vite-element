@@ -3,7 +3,10 @@ import { inject } from 'vue';
 import type { InputFormItem } from '@/views/form/index';
 
 const configInfo: InputFormItem = inject<InputFormItem>("selectFormItem") as InputFormItem;
-
+/**验证规则改变 */
+function rulesChange(value: any) {
+  configInfo.rules.type = value
+}
 </script>
 <template>
   <el-form label-position="top">
@@ -79,7 +82,14 @@ const configInfo: InputFormItem = inject<InputFormItem>("selectFormItem") as Inp
     </el-form-item>
     <el-divider content-position="center">验证规则</el-divider>
     <el-form-item label="字段类型">
-      <el-select v-model="configInfo.validate"></el-select>
+      <el-select :model-value="configInfo.rules.type" @update:model-value="rulesChange">
+        <el-option label="字符串" value="string"></el-option>
+        <el-option label="数字" value="number"></el-option>
+        <el-option label="邮箱" value="email"></el-option>
+        <el-option label="手机号码" value="phone"></el-option>
+        <el-option label="汉字" value="chinese"></el-option>
+        <el-option label="IP地址" value="ip"></el-option>
+      </el-select>
     </el-form-item>
   </el-form>
 </template>

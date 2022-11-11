@@ -6,7 +6,7 @@ import operateButtonVue from "./components/operateButton.vue";
 import dragIconVue from "./components/dragIcon.vue";
 const props = defineProps(["formItem", "formItemList"]);
 /**当前选中的元素 */
-const selectFormItem: FormItem = inject<FormItem>("selectFormItem") as FormItem;
+const selectFormItem: FormItem = inject("selectFormItem") as FormItem;
 /**当前的formitem元素,当选中的为col时,formitem元素为row */
 const formItem: FormItem = props.formItem;
 watch(

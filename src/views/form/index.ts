@@ -31,16 +31,14 @@ interface FormItem {
   type: string,
   /**组件的字段 */
   field: string,
-  /**是否必填 */
-  required: boolean,
   /**提示 */
-  toolTip?:string,
+  toolTip?: string,
   /**组件的值 */
   value: any
+  /**是否必填 */
+  required: boolean,
   /**组件验证规则 */
-  validate?: Array<any>
-  /**栅格布局 */
-  row?: any,
+  rules: { [key: string]: any }
   /**参数 */
   props?: any
 }
