@@ -11,7 +11,7 @@ switch (formItem.rules.type) {
       type: 'string',
       validator: (rule: any, value: any, callback: any) => {
         if (value && value != '') {
-          if (/[\u00A0,\u0020,\u3000]/g.test(value)) {
+          if (/[\u00A0\u0020\u3000]/.test(value)) {
             callback(new Error('请输入不带空格的字符串'))
           } else {
             callback()
@@ -67,7 +67,7 @@ switch (formItem.rules.type) {
       type: 'chinese',
       validator: (rule: any, value: any, callback: any) => {
         if (value && value != '') {
-          if (!/^[\u2E80-\u9FFF,\uFF01-\uFF1F,\u2013-\u2026]+$/.test(value)) {
+          if (!/^[\u2E80-\u9FFF\uFF01-\uFF1F\u2013-\u2026]+$/.test(value)) {
             callback(new Error('请输入中文字符'))
           } else {
             callback()
