@@ -10,10 +10,12 @@ switch (formItem.rules.type) {
     formItem.rules = {
       type: 'string',
       validator: (rule: any, value: any, callback: any) => {
-        if (/[\u00A0,\u0020,\u3000]/g.test(value)) {
-          callback(new Error('请输入不带空格的字符串'))
-        } else {
-          callback()
+        if (value && value != '') {
+          if (/[\u00A0,\u0020,\u3000]/g.test(value)) {
+            callback(new Error('请输入不带空格的字符串'))
+          } else {
+            callback()
+          }
         }
       }
     }
@@ -22,10 +24,12 @@ switch (formItem.rules.type) {
     formItem.rules = {
       type: 'number',
       validator: (rule: any, value: any, callback: any) => {
-        if (/\D/g.test(value)) {
-          callback(new Error('请输入数字'))
-        } else {
-          callback()
+        if (value && value != '') {
+          if (/\D/g.test(value)) {
+            callback(new Error('请输入数字'))
+          } else {
+            callback()
+          }
         }
       }
     }
@@ -34,10 +38,12 @@ switch (formItem.rules.type) {
     formItem.rules = {
       type: 'email',
       validator: (rule: any, value: any, callback: any) => {
-        if (!/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(value)) {
-          callback(new Error('请输入正确的邮箱格式'))
-        } else {
-          callback()
+        if (value && value != '') {
+          if (!/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/.test(value)) {
+            callback(new Error('请输入正确的邮箱格式'))
+          } else {
+            callback()
+          }
         }
       }
     }
@@ -46,10 +52,12 @@ switch (formItem.rules.type) {
     formItem.rules = {
       type: 'phone',
       validator: (rule: any, value: any, callback: any) => {
-        if (!/^1[3-9]\d{9}$/.test(value)) {
-          callback(new Error('请输入正确的电话号码'))
-        } else {
-          callback()
+        if (value && value != '') {
+          if (!/^1[3-9]\d{9}$/.test(value)) {
+            callback(new Error('请输入正确的电话号码'))
+          } else {
+            callback()
+          }
         }
       }
     }
@@ -58,10 +66,12 @@ switch (formItem.rules.type) {
     formItem.rules = {
       type: 'chinese',
       validator: (rule: any, value: any, callback: any) => {
-        if (!/^[\u2E80-\u9FFF]+$/.test(value)) {
-          callback(new Error('请输入中文字符'))
-        } else {
-          callback()
+        if (value && value != '') {
+          if (!/^[\u2E80-\u9FFF,\uFF01-\uFF1F,\u2013-\u2026]+$/.test(value)) {
+            callback(new Error('请输入中文字符'))
+          } else {
+            callback()
+          }
         }
       }
     }
@@ -70,15 +80,18 @@ switch (formItem.rules.type) {
     formItem.rules = {
       type: 'ip',
       validator: (rule: any, value: any, callback: any) => {
-        if (!/^((2[0-4]\d|25[0-5]|[0-1]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[0-1]?\d\d?)$/.test(value)) {
-          callback(new Error('请输入正确的IP地址'))
-        } else {
-          callback()
+        if (value && value != '') {
+          if (!/^((2[0-4]\d|25[0-5]|[0-1]?\d\d?)\.){3}(2[0-4]\d|25[0-5]|[0-1]?\d\d?)$/.test(value)) {
+            callback(new Error('请输入正确的IP地址'))
+          } else {
+            callback()
+          }
         }
       }
     }
     break;
 
+      
   default:
     break;
 }
