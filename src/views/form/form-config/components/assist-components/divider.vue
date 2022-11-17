@@ -6,7 +6,7 @@ const configInfo: DividerFormItem = inject<DividerFormItem>("selectFormItem") as
 
 </script>
 <template>
-  <el-form label-position="top">
+  <div>
     <el-divider content-position="center">属性配置</el-divider>
     <el-form-item label="设置分割线方向">
       <el-select v-model="configInfo.props.direction">
@@ -25,7 +25,7 @@ const configInfo: DividerFormItem = inject<DividerFormItem>("selectFormItem") as
         <el-option label="right" value="right"></el-option>
       </el-select>
     </el-form-item>
-  </el-form>
+  </div>
 </template>
 <style scoped lang="scss">
 

@@ -6,9 +6,9 @@ const configInfo: InputNumberFormItem = inject<InputNumberFormItem>("selectFormI
 
 </script>
 <template>
-  <el-form label-position="top">
+  <div>
     <el-divider content-position="center">基础配置</el-divider>
-    <el-form-item label="字段ID">
+    <el-form-item label="字段名">
       <el-input v-model="configInfo.field" maxlength="99">
       </el-input>
     </el-form-item>
@@ -64,7 +64,7 @@ const configInfo: InputNumberFormItem = inject<InputNumberFormItem>("selectFormI
     <el-form-item label="字段类型">
       <el-select v-model="configInfo.validate"></el-select>
     </el-form-item>
-  </el-form>
+  </div>
 </template>
 <style scoped lang="scss">
 

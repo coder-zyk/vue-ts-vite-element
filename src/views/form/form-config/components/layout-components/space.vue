@@ -6,13 +6,13 @@ const configInfo: SpaceFormItem = inject<SpaceFormItem>("selectFormItem") as Spa
 
 </script>
 <template>
-  <el-form label-position="top">
+  <div>
     <el-divider content-position="center">属性配置</el-divider>
     <el-form-item label="高度">
       <el-input-number v-model="configInfo.props.height" :max="999" :min="1">
       </el-input-number>
     </el-form-item>
-  </el-form>
+  </div>
 </template>
 <style scoped lang="scss">
 

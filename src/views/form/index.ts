@@ -88,7 +88,7 @@ interface InputNumberFormItem extends FormItem {
 }
 /**单选框配置 */
 interface RadioFormItem extends FormItem {
-  remote: boolean,
+  remote: 'static' | 'json' | 'api',
   data: Array<any>
   props: {
     disabled: boolean,
@@ -101,7 +101,7 @@ interface RadioFormItem extends FormItem {
 }
 /**多选框配置 */
 interface CheckboxFormItem extends FormItem {
-  remote: boolean,
+  remote: 'static' | 'json' | 'api',
   data: Array<any>
   props: {
     disabled: boolean,
@@ -116,7 +116,7 @@ interface CheckboxFormItem extends FormItem {
 }
 /**下拉选择框配置 */
 interface SelectFormItem extends FormItem {
-  remote: boolean,
+  remote: 'static' | 'json' | 'api',
   data: Array<any>
   props: {
     multiple: boolean,
@@ -236,6 +236,37 @@ interface DividerFormItem extends FormItem {
     contentPosition: 'left' | 'center' | 'right'
   }
 }
+/**级联选择配置 */
+interface CascaderFormItem extends FormItem {
+  remote: 'static' | 'json' | 'api',
+  remoteSetting: {
+    url: string,
+    method: 'GET' | 'POST'
+    params: string,
+    header: string,
+    parseFunction: string
+  },
+  data: Array<any>,
+  props: {
+    props: {
+      multiple: boolean,
+      value: string,
+      label: string,
+      children: string,
+      emitPath: boolean,
+      expandTrigger: 'click' | 'hover'
+    },
+    placeholder: string,
+    disabled: boolean,
+    clearable: boolean,
+    showAllLevels: boolean,
+    collapseTags: boolean,
+    collapseTagsTooltip: boolean,
+    separator: string,
+    filterable: boolean,
+    tagType: 'success' | 'info' | 'warning' | 'danger'
+  }
+}
 export type {
   FormItem,
   TextFormItem,
@@ -255,5 +286,6 @@ export type {
   FormInfo,
   FormConfig,
   SpaceFormItem,
-  DividerFormItem
+  DividerFormItem,
+  CascaderFormItem
 }

@@ -91,7 +91,7 @@ switch (formItem.rules.type) {
     }
     break;
 
-      
+
   default:
     break;
 }
@@ -203,6 +203,12 @@ switch (formItem.rules.type) {
       :show-input-controls="formItem.props.showInputControls" :show-stops="formItem.props.showStops"
       :height="formItem.props.height" :step="formItem.props.step" :vertical="formItem.props.vertical"
       :range="formItem.props.range" />
+    <el-cascader v-if="formItem.type === 'cascader'" v-model="formItem.value" :disabled="formItem.props.disabled"
+      :clearable="formItem.props.clearable" :filterable="formItem.props.filterable"
+      :separator="formItem.props.separator" :props="formItem.props.props"
+      :collapse-tags-tooltip="formItem.props.collapseTagsTooltip" :collapse-tags="formItem.props.collapseTags"
+      :tag-type="formItem.props.tagType" :show-all-levels="formItem.props.showAllLevels"
+      :placeholder="formItem.props.placeholder" :options="formItem.data" style="width:100%" />
   </el-form-item>
 </template>
 <style scoped lang='scss'>

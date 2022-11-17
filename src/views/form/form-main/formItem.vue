@@ -135,7 +135,14 @@ function clickHandle(selectElement: FormItem) {
         :min="formItem.props.min" :show-input="formItem.props.showInput"
         :show-input-controls="formItem.props.showInputControls" :show-stops="formItem.props.showStops"
         :height="formItem.props.height" :step="formItem.props.step" :vertical="formItem.props.vertical"
-        :range="formItem.props.range" />
+        :range="formItem.props.range" :disabled="formItem.props.disabled" />
+      <!-- 级联选择 -->
+      <el-cascader v-if="formItem.type === 'cascader'" v-model="formItem.value" :disabled="formItem.props.disabled"
+        :clearable="formItem.props.clearable" :filterable="formItem.props.filterable"
+        :separator="formItem.props.separator" :props="formItem.props.props"
+        :collapse-tags-tooltip="formItem.props.collapseTagsTooltip" :collapse-tags="formItem.props.collapseTags"
+        :tag-type="formItem.props.tagType" :show-all-levels="formItem.props.showAllLevels"
+        :placeholder="formItem.props.placeholder" :options="formItem.data" style="width:100%" />
     </el-form-item>
     <div class="form-main-item-mask" @click.prevent.stop="clickHandle(formItem)"></div>
   </div>

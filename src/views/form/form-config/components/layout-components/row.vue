@@ -3,7 +3,7 @@ import type { RowFormItem } from '@/views/form/index';
 const configInfo: RowFormItem = inject<RowFormItem>("selectFormItem") as RowFormItem;
 </script>
 <template>
-  <el-form label-position="top">
+  <div>
     <el-divider content-position="center">属性配置</el-divider>
     <el-form-item label="栅格间隔">
       <el-input-number v-model="configInfo.props.gutter" :min="0" :max="100" />
@@ -24,7 +24,7 @@ const configInfo: RowFormItem = inject<RowFormItem>("selectFormItem") as RowForm
         <el-option label="bottom" value="bottom"></el-option>
       </el-select>
     </el-form-item>
-  </el-form>
+  </div>
 </template>
 <style scoped lang="scss">
 

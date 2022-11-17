@@ -6,9 +6,9 @@ import { Delete, Plus } from '@element-plus/icons-vue';
 const configInfo: RadioFormItem = inject<RadioFormItem>("selectFormItem") as RadioFormItem;
 </script>
 <template>
-  <el-form label-position="top">
+  <div>
     <el-divider content-position="center">基础配置</el-divider>
-    <el-form-item label="字段ID">
+    <el-form-item label="字段名">
       <el-input v-model="configInfo.field" maxlength="99"></el-input>
     </el-form-item>
     <el-form-item label="标签名">
@@ -26,8 +26,9 @@ const configInfo: RadioFormItem = inject<RadioFormItem>("selectFormItem") as Rad
     </el-form-item>
     <el-form-item label="选项数据">
       <el-radio-group v-model="configInfo.remote">
-        <el-radio-button :label="false">静态数据</el-radio-button>
-        <el-radio-button :label="true">接口数据</el-radio-button>
+        <el-radio-button label="static">静态数据</el-radio-button>
+        <el-radio-button label="json">JSON数据</el-radio-button>
+        <el-radio-button label="api">接口数据</el-radio-button>
         <div v-if="!configInfo.remote">
           <el-table :data="configInfo.data" style="width: 100%;margin-top: 10px;" border size="small">
             <el-table-column label="label">
@@ -73,7 +74,7 @@ const configInfo: RadioFormItem = inject<RadioFormItem>("selectFormItem") as Rad
     <el-form-item label="字段类型">
       <el-select v-model="configInfo.validate"></el-select>
     </el-form-item>
-  </el-form>
+  </div>
 </template>
 <style scoped lang="scss">
 

@@ -1,4 +1,4 @@
-import type { TextFormItem, InputFormItem, RadioFormItem, InputNumberFormItem, CheckboxFormItem, SelectFormItem, DateFormItem, TimeFormItem, ColorPickerFormItem, SwitchFormItem, RateFormItem, SliderFormItem, RowFormItem, ColFormItem, SpaceFormItem, DividerFormItem } from "."
+import type { TextFormItem, InputFormItem, RadioFormItem, InputNumberFormItem, CheckboxFormItem, SelectFormItem, DateFormItem, TimeFormItem, ColorPickerFormItem, SwitchFormItem, RateFormItem, SliderFormItem, RowFormItem, ColFormItem, SpaceFormItem, DividerFormItem, CascaderFormItem } from "."
 
 class Maker {
   /**索引签名
@@ -84,7 +84,7 @@ class Maker {
       label: '单选框',
       field: 'radio',
       value: '',
-      remote: false,
+      remote: 'static',
       rules: {},
       required: false,
       props: {
@@ -125,7 +125,7 @@ class Maker {
         max: 999,
         min: 0
       },
-      remote: false,
+      remote: 'static',
       data: [{
         label: '选项1',
         value: 1
@@ -144,7 +144,7 @@ class Maker {
       label: '选择框',
       field: 'select',
       value: [],
-      remote: false,
+      remote: 'static',
       rules: {},
       required: false,
       data: [{
@@ -295,14 +295,103 @@ class Maker {
     }
   }
   /**级联选择 */
-  cascader(): any {
+  cascader(): CascaderFormItem {
     return {
       type: 'cascader',
       id: 'cascader',
       label: '级联选择器',
       field: 'cascader',
       value: '',
+      required: false,
+      rules: {},
+      remote: 'json',
+      remoteSetting: {
+        url: '',
+        method: 'GET',
+        params: '{}',
+        header: '',
+        parseFunction: ''
+      },
+      data: [{
+        value: '父节点1',
+        label: '父节点1',
+        children: [
+          {
+            value: '子节点1',
+            label: '子节点1',
+            children: [
+              {
+                value: '孙节点1',
+                label: '孙节点1',
+              },
+              {
+                value: '孙节点2',
+                label: '孙节点2',
+              },
+            ],
+          }, {
+            value: '子节点1',
+            label: '子节点1',
+            children: [
+              {
+                value: '孙节点1',
+                label: '孙节点1',
+              },
+              {
+                value: '孙节点2',
+                label: '孙节点2',
+              },
+            ],
+          }],
+      }, {
+        value: '父节点2',
+        label: '父节点2',
+        children: [
+          {
+            value: '子节点1',
+            label: '子节点1',
+            children: [
+              {
+                value: '孙节点1',
+                label: '孙节点1',
+              },
+              {
+                value: '孙节点2',
+                label: '孙节点2',
+              },
+            ],
+          }, {
+            value: '子节点1',
+            label: '子节点1',
+            children: [
+              {
+                value: '孙节点1',
+                label: '孙节点1',
+              },
+              {
+                value: '孙节点2',
+                label: '孙节点2',
+              }],
+          }]
+      }],
       props: {
+        placeholder: '',
+        props: {
+          multiple: false,
+          expandTrigger: 'click',
+          emitPath: true,
+          label: 'label',
+          value: 'value',
+          children: 'children'
+        },
+        disabled: false,
+        clearable: false,
+        showAllLevels: true,
+        collapseTags: false,
+        collapseTagsTooltip: false,
+        separator: '/',
+        filterable: false,
+        tagType: 'info'
       }
     }
   }

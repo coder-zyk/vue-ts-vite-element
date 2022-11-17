@@ -17,6 +17,7 @@ import rowVue from "./components/layout-components/row.vue";
 import colVue from './components/layout-components/col.vue'
 import spaceVue from "./components/layout-components/space.vue";
 import dividerVue from "./components/assist-components/divider.vue";
+import cascaderVue from "./components/base-components/cascader.vue";
 /**表单信息 */
 const formInfo: FormInfo = inject<FormInfo>("formInfo") as FormInfo;
 /**当前选中的元素 */
@@ -41,8 +42,8 @@ watch(
 
 <template>
   <el-tabs v-model="activeName" style="height:100%;padding: 0 20px;">
-    <el-tab-pane label="表单配置" name="formConfig" >
-      <el-form label-position="top">
+    <el-tab-pane label="表单配置" name="formConfig">
+      <el-form label-position="top" size="small">
         <el-form-item label="表单名称">
           <el-input v-model="formInfo.config.name"></el-input>
         </el-form-item>
@@ -70,25 +71,27 @@ watch(
         </el-form-item>
       </el-form>
     </el-tab-pane>
-    <el-tab-pane style="height:100%;" label="组件配置" name="formItemConfig"
-      v-if="/^[a-z]*_\d*/.test(selectFormItem.id)">
+    <el-tab-pane style="height:100%;" label="组件配置" name="formItemConfig" v-if="/^[a-z]*_\d*/.test(selectFormItem.id)">
       <el-scrollbar>
-        <text-vue v-if="selectFormItem.type == 'text'" :config-info="selectFormItem"></text-vue>
-        <input-vue v-if="selectFormItem.type == 'input'" :config-info="selectFormItem"></input-vue>
-        <radio-vue v-if="selectFormItem.type == 'radio'" :config-info="selectFormItem"></radio-vue>
-        <input-number-vue v-if="selectFormItem.type == 'number'" :config-info="selectFormItem"></input-number-vue>
-        <checkbox-vue v-if="selectFormItem.type == 'checkbox'" :config-info="selectFormItem"></checkbox-vue>
-        <select-vue v-if="selectFormItem.type == 'select'" :config-info="selectFormItem"></select-vue>
-        <date-vue v-if="selectFormItem.type == 'date'" :config-info="selectFormItem"></date-vue>
-        <time-vue v-if="selectFormItem.type == 'time'" :config-info="selectFormItem"></time-vue>
-        <color-picker-vue v-if="selectFormItem.type == 'color'" :config-info="selectFormItem"></color-picker-vue>
-        <switch-vue v-if="selectFormItem.type == 'switch'" :config-info="selectFormItem"></switch-vue>
-        <rate-vue v-if="selectFormItem.type == 'rate'" :config-info="selectFormItem"></rate-vue>
-        <slider-vue v-if="selectFormItem.type == 'slider'" :config-info="selectFormItem"></slider-vue>
-        <row-vue v-if="selectFormItem.type == 'row'" :config-info="selectFormItem"></row-vue>
-        <col-vue v-if="selectFormItem.type == 'col'" :config-info="selectFormItem"></col-vue>
-        <space-vue v-if="selectFormItem.type == 'space'" :config-info="selectFormItem"></space-vue>
-        <divider-vue v-if="selectFormItem.type == 'divider'" :config-info="selectFormItem"></divider-vue>
+        <el-form label-position="top" size="small">
+          <text-vue v-if="selectFormItem.type == 'text'" :config-info="selectFormItem"></text-vue>
+          <input-vue v-if="selectFormItem.type == 'input'" :config-info="selectFormItem"></input-vue>
+          <radio-vue v-if="selectFormItem.type == 'radio'" :config-info="selectFormItem"></radio-vue>
+          <input-number-vue v-if="selectFormItem.type == 'number'" :config-info="selectFormItem"></input-number-vue>
+          <checkbox-vue v-if="selectFormItem.type == 'checkbox'" :config-info="selectFormItem"></checkbox-vue>
+          <select-vue v-if="selectFormItem.type == 'select'" :config-info="selectFormItem"></select-vue>
+          <date-vue v-if="selectFormItem.type == 'date'" :config-info="selectFormItem"></date-vue>
+          <time-vue v-if="selectFormItem.type == 'time'" :config-info="selectFormItem"></time-vue>
+          <color-picker-vue v-if="selectFormItem.type == 'color'" :config-info="selectFormItem"></color-picker-vue>
+          <switch-vue v-if="selectFormItem.type == 'switch'" :config-info="selectFormItem"></switch-vue>
+          <rate-vue v-if="selectFormItem.type == 'rate'" :config-info="selectFormItem"></rate-vue>
+          <slider-vue v-if="selectFormItem.type == 'slider'" :config-info="selectFormItem"></slider-vue>
+          <row-vue v-if="selectFormItem.type == 'row'" :config-info="selectFormItem"></row-vue>
+          <col-vue v-if="selectFormItem.type == 'col'" :config-info="selectFormItem"></col-vue>
+          <space-vue v-if="selectFormItem.type == 'space'" :config-info="selectFormItem"></space-vue>
+          <divider-vue v-if="selectFormItem.type == 'divider'" :config-info="selectFormItem"></divider-vue>
+          <cascader-vue v-if="selectFormItem.type == 'cascader'" :config-info="selectFormItem"></cascader-vue>
+        </el-form>
       </el-scrollbar>
     </el-tab-pane>
   </el-tabs>

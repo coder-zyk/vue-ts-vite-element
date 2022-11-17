@@ -9,9 +9,9 @@ function rulesChange(value: any) {
 }
 </script>
 <template>
-  <el-form label-position="top">
+  <div>
     <el-divider content-position="center">基础配置</el-divider>
-    <el-form-item label="字段ID">
+    <el-form-item label="字段名">
       <el-input v-model="configInfo.field" maxlength="99">
       </el-input>
     </el-form-item>
@@ -91,7 +91,7 @@ function rulesChange(value: any) {
         <el-option label="IP地址" value="ip"></el-option>
       </el-select>
     </el-form-item>
-  </el-form>
+  </div>
 </template>
 <style scoped lang="scss">
 
