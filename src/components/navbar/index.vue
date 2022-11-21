@@ -1,7 +1,13 @@
 <script setup lang='ts'>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router';
 
-const activeIndex = ref('/form')
+const route = useRoute()
+
+const activeIndex = ref(route.path)
+watch(route, (value) => {
+  activeIndex.value = value.path
+})
 const handleSelect = (key: string, keyPath: string[]) => {
 }
 </script>
