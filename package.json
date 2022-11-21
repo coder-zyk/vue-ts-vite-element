@@ -10,6 +10,8 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@codemirror/lang-javascript": "^6.1.1",
+    "@codemirror/state": "^6.1.4",
     "@element-plus/icons-vue": "^2.0.10",
     "axios": "^0.27.2",
     "codemirror": "^6.0.1",

@@ -1,25 +1,27 @@
 <script setup lang="ts">
-import { inject, nextTick, onMounted, ref, watch } from 'vue';
+import { inject, ref, type Ref } from 'vue';
 import type { CascaderFormItem } from '@/views/form/index';
-import { EditorView, basicSetup } from "codemirror"
 import { Warning } from '@element-plus/icons-vue'
-const configInfo: CascaderFormItem = inject<CascaderFormItem>("selectFormItem") as CascaderFormItem;
+import codemirror from '@/views/form/components/codemirror/index.vue'
+const configInfo: CascaderFormItem = inject("selectFormItem") as CascaderFormItem;
 
-const editorRef = ref()
+const codeParamsRef = ref()
+const codeHeaderRef = ref()
 
-/**展示接口请求参数 */
-const showParams = ref(false)
-watch(showParams, (value) => {
-  if (value) {
-    nextTick(() => {
-      new EditorView({
-        extensions: [basicSetup],
-        parent: editorRef.value,
-      })
-    })
-  }
-})
-
+/**展示附加参数 */
+const showParams: Ref<boolean> = ref(false)
+/**展示header信息 */
+const showHeader: Ref<boolean> = ref(false)
+/**导出附加参数 */
+function exportParamsData() {
+  configInfo.remoteSetting.params = codeParamsRef.value.exportData()
+  showParams.value = false
+}
+/**导出header信息 */
+function exportHeaderData() {
+  configInfo.remoteSetting.header = codeParamsRef.value.exportData()
+  showHeader.value = false
+}
 </script>
 <template>
   <div>
@@ -62,7 +64,7 @@ watch(showParams, (value) => {
             <el-button @click="showParams = true">编辑数据</el-button>
           </el-form-item>
           <el-form-item label="header信息:" label-width="80px">
-            <el-button>编辑数据</el-button>
+            <el-button @click="showHeader = true">编辑数据</el-button>
           </el-form-item>
           <el-form-item label-width="80px" prop="parseFunction" :rules="[]">
             <template #label>
@@ -134,9 +136,19 @@ watch(showParams, (value) => {
     <el-form-item label="指定选项的子选项为选项对象的某个属性值">
       <el-input v-model="configInfo.props.props.children" maxlength="99"></el-input>
     </el-form-item>
-    <el-dialog v-model="showParams" title="编辑数据">
-      <div ref="editorRef" style="height: 400px;">
-      </div>
+    <el-dialog v-model="showParams" title="附加数据">
+      <codemirror ref="codeParamsRef" :code="configInfo.remoteSetting.params"></codemirror>
+      <template #footer>
+        <el-button @click="showParams = false">取消</el-button>
+        <el-button @click="exportParamsData" type="primary">确定</el-button>
+      </template>
+    </el-dialog>
+    <el-dialog v-model="showHeader" title="header信息">
+      <codemirror ref="codeHeaderRef" :code="configInfo.remoteSetting.header"></codemirror>
+      <template #footer>
+        <el-button @click="showHeader = false">取消</el-button>
+        <el-button @click="exportHeaderData" type="primary">确定</el-button>
+      </template>
     </el-dialog>
   </div>
 </template>

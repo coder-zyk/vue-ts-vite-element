@@ -308,8 +308,8 @@ class Maker {
       remoteSetting: {
         url: '',
         method: 'GET',
-        params: '{}',
-        header: '',
+        params: '["{","}"]',
+        header: '["{","}"]',
         parseFunction: ''
       },
       data: [{
