@@ -50,7 +50,7 @@ function exportHeaderData() {
       <div style="padding:10px;background-color:#bfdaf7;width:100%" class="api-form">
         <el-form label-position="left" :model="configInfo.remoteSetting">
           <el-form-item label="接口:" label-width="80px"
-            :rules="{ required: true, message: '请输入接口地址', tragger: ['blur', 'change'] }" prop="url">
+            :rules="{ required: true, message: '请输入接口地址', trigger: ['blur', 'change'] }" prop="url">
             <el-input :model-value="configInfo.remoteSetting.url"
               @input="(value: string) => configInfo.remoteSetting.url = value"></el-input>
           </el-form-item>
