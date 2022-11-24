@@ -13,9 +13,9 @@ const formInfo: FormInfo = reactive({
   id: 0,
   config: {
     name: "",
-    labelPosition: "left",
+    labelPosition: "right",
     size: "default",
-    labelWidth: 90,
+    labelWidth: 120,
     dbName: {
       name: "",
       dbId: 0,
