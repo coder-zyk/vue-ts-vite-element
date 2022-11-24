@@ -90,9 +90,12 @@ switch (formItem.rules.type) {
       }
     }
     break;
-
-
   default:
+    formItem.rules = {
+      validator: (rule: any, value: any, callback: any) => {
+        callback()
+      }
+    }
     break;
 }
 </script>
