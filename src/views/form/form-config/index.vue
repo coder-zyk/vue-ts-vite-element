@@ -41,9 +41,9 @@ watch(
 </script>
 
 <template>
-  <el-tabs v-model="activeName" style="height:100%;padding: 0 20px;">
+  <el-tabs v-model="activeName" style="height:100%;padding: 0 10px;">
     <el-tab-pane label="表单配置" name="formConfig">
-      <el-form label-position="top" size="small">
+      <el-form label-position="top">
         <el-form-item label="表单名称">
           <el-input v-model="formInfo.config.name"></el-input>
         </el-form-item>
@@ -73,7 +73,7 @@ watch(
     </el-tab-pane>
     <el-tab-pane style="height:100%;" label="组件配置" name="formItemConfig" v-if="/^[a-z]*_\d*/.test(selectFormItem.id)">
       <el-scrollbar>
-        <el-form label-position="top" size="small">
+        <el-form label-position="top">
           <text-vue v-if="selectFormItem.type == 'text'" :config-info="selectFormItem"></text-vue>
           <input-vue v-if="selectFormItem.type == 'input'" :config-info="selectFormItem"></input-vue>
           <radio-vue v-if="selectFormItem.type == 'radio'" :config-info="selectFormItem"></radio-vue>
