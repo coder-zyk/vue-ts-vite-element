@@ -14,7 +14,7 @@ defineExpose({
 </script>
 <template>
   <el-form :label-width="formInfo.config.labelWidth" :size="formInfo.config.size"
-    :label-position="formInfo.config.labelPosition" :model="formInfo.model" ref="formRef" require-asterisk-position="right">
+    :label-position="formInfo.config.labelPosition" :model="formInfo.model" ref="formRef">
     <template v-for="formItem in formInfo.list">
       <generateFormItemVue v-if="formItem.type != 'row'" :form-item-info="formItem" :model="formInfo.model">
       </generateFormItemVue>

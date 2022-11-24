@@ -145,10 +145,9 @@ watch(() => selectFormItem.field, (newValue, oldValue) => {
         </el-upload>
       </el-space>
     </el-header>
-    <el-main style=" background-color: #f1f1f1">
+    <el-main style="background-color: #f1f1f1">
       <el-form style="height: 100%;background-color: white" :size="formInfo.config.size"
-        :label-width="formInfo.config.labelWidth" id="formRef" require-asterisk-position="right"
-        :label-position="formInfo.config.labelPosition">
+        :label-width="formInfo.config.labelWidth" id="formRef" :label-position="formInfo.config.labelPosition">
         <el-scrollbar>
           <draggable :list="formInfo.list" group="people" item-key="id" handle=".draggable-icon" @change="change"
             ghost-class="form-main-ghost" :style="`min-height:${formHeight}px;width:100%`" :animation="100"
