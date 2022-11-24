@@ -147,11 +147,12 @@ watch(() => selectFormItem.field, (newValue, oldValue) => {
     </el-header>
     <el-main style=" background-color: #f1f1f1">
       <el-form style="height: 100%;background-color: white" :size="formInfo.config.size"
-        :label-width="formInfo.config.labelWidth" id="formRef" require-asterisk-position="right" :label-position="formInfo.config.labelPosition">
+        :label-width="formInfo.config.labelWidth" id="formRef" require-asterisk-position="right"
+        :label-position="formInfo.config.labelPosition">
         <el-scrollbar>
           <draggable :list="formInfo.list" group="people" item-key="id" handle=".draggable-icon" @change="change"
-            ghost-class="form-main-ghost" :style="`min-height:${formHeight}px;width:100%`" :force-fallback="true"
-            :fallback-class="true" :animation="100">
+            ghost-class="form-main-ghost" :style="`min-height:${formHeight}px;width:100%`" :animation="100"
+            :fallback-class="true">
             <template #item="{ element }">
               <form-item-vue :formItem="element" :formItemList="formInfo.list" v-if="element.type != 'row'">
               </form-item-vue>
@@ -171,7 +172,7 @@ watch(() => selectFormItem.field, (newValue, oldValue) => {
                     <draggable :list="item.props.children" :group="groupRow" item-key="id" ghost-class="form-main-ghost"
                       handle=".draggable-icon" @change="change($event, item.props.children)"
                       :class="`form-main-item ${selectFormItem.id == item.id ? 'form-main-item-active' : ''}`"
-                      :fallback-class="true" :force-fallback="true"  :animation="100">
+                      :animation="100" :fallback-class="true">
                       <template #item="{ element }">
                         <form-item-vue :formItem="element" :formItemList="item.props.children"></form-item-vue>
                       </template>

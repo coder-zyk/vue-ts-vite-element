@@ -29,8 +29,7 @@ function addFormItem(value: FormItem): FormItem {
       <el-scrollbar>
         <el-divider content-position="left">表单组件</el-divider>
         <draggable :list="formComponents" :group="{ name: 'people', pull: 'clone', put: false }" item-key="id"
-          :sort="false" :force-fallback="true" ghost-class="form-components-ghost" chosenClass="form-components-chosen"
-          :clone="addFormItem" :fallback-class="true">
+          :sort="false" :clone="addFormItem" :fallback-class="true">
           <template #item="{ element }">
             <div class="form-components-item">
               <div class="form-components-icon">
@@ -42,8 +41,8 @@ function addFormItem(value: FormItem): FormItem {
         </draggable>
         <el-divider content-position="left">辅助组件</el-divider>
         <draggable :list="assistComponents" :group="{ name: 'people', pull: 'clone', put: false }" item-key="id"
-          :sort="false" :force-fallback="true" ghost-class="form-components-ghost" chosenClass="form-components-chosen"
-          :clone="addFormItem">
+          :sort="false" ghost-class="form-components-ghost" chosenClass="form-components-chosen" :clone="addFormItem"
+          :fallback-class="true">
           <template #item="{ element }">
             <div class="form-components-item">
               <div class="form-components-icon">
@@ -55,8 +54,8 @@ function addFormItem(value: FormItem): FormItem {
         </draggable>
         <el-divider content-position="left">布局组件</el-divider>
         <draggable :list="layoutComponents" :group="{ name: 'people', pull: 'clone', put: false }" item-key="id"
-          :sort="false" :force-fallback="true" ghost-class="form-components-ghost" chosenClass="form-components-chosen"
-          :clone="addFormItem" :fallback-class="true">
+          :sort="false" ghost-class="form-components-ghost" chosenClass="form-components-chosen" :clone="addFormItem"
+          :fallback-class="true">
           <template #item="{ element }">
             <div class="form-components-item">
               <div class="form-components-icon">
@@ -78,7 +77,7 @@ function addFormItem(value: FormItem): FormItem {
 
 <style scoped lang="scss">
 .form-main-ghost {
-  height: 5px;
+  height: 10px;
   background-color: #75b5f9;
   color: #ffffff00;
 }
