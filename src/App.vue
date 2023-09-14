@@ -1,6 +1,18 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import Navbar from '@/components/navbar/index.vue'
+import { RouterLink, RouterView } from "vue-router";
+import Navbar from "@/components/navbar/index.vue";
+let socket = new WebSocket("ws:192.168.1.2:1234");
+socket.onopen = () => {
+  socket.send(
+    JSON.stringify({
+      code: 5,
+      userId: "admin",
+    })
+  );
+};
+socket.onmessage = ({ data }) => {
+  console.log(data);
+};
 </script>
 
 <template>
@@ -12,7 +24,9 @@ import Navbar from '@/components/navbar/index.vue'
       <RouterView />
     </el-main>
     <el-footer class="zyk-footer">
-      <el-link href="https://beian.miit.gov.cn/" target="_blank">蜀ICP备2022002176号</el-link>
+      <el-link href="https://beian.miit.gov.cn/" target="_blank"
+        >蜀ICP备2022002176号</el-link
+      >
     </el-footer>
   </el-container>
 </template>

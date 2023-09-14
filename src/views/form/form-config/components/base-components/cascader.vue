@@ -2,7 +2,7 @@
 import { inject, ref, type Ref } from 'vue';
 import type { CascaderFormItem } from '@/views/form/index';
 import { Warning } from '@element-plus/icons-vue'
-import codemirror from '@/views/form/components/codemirror/index.vue'
+import codemirror from '@/views/form/components/codemirror/codemirror.vue'
 const configInfo: CascaderFormItem = inject("selectFormItem") as CascaderFormItem;
 
 const codeParamsRef = ref()

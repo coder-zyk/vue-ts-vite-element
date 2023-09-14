@@ -6,7 +6,7 @@ import { View, Upload, Download, Tickets, Delete } from "@element-plus/icons-vue
 import { inject, onMounted, reactive, ref, watch, type Ref } from "vue";
 import operateButtonVue from "./components/operateButton.vue";
 import dragIconVue from "./components/dragIcon.vue";
-import previewFormVue from "../form-preview/index.vue"
+import previewFormVue from "../form-preview/preview.vue"
 import { ElAlert, ElMessage, ElMessageBox, type UploadFile, type UploadRawFile } from "element-plus";
 /**表单信息 */
 const formInfo: FormInfo = inject("formInfo") as FormInfo;

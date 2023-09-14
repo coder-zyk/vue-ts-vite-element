@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { FormInfo, FormItem } from "@/views/form/index";
-import formLeft from "./form-compoents/index.vue";
-import formMain from "./form-main/index.vue";
-import formConfig from "./form-config/index.vue";
+import formLeft from "./form-compoents/formCompoents.vue";
+import formMain from "./form-main/formMain.vue";
+import formConfig from "./form-config/formConfig.vue";
 import { reactive, ref, watch, provide, type Ref } from "vue";
 import './style/common.scss'
 /**表单列表 */
